@@ -13,42 +13,46 @@ function CheckStatus(response) {
   return Promise.reject(error);
 }
 
-const uri = "https://jsonplaceholder.typicode.com/posts/";
+//https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker
 
-const getPostByAsync = async (nb) => {
-  const response = await fetch(`${uri}${nb}`);
-  if (response.ok) {
-    const data = await response.json();
-    const jsonResponse = new Response(JSON.stringify(data), {
-      headers: { "content-type": "application/json" },
-    });
-    caches.open("result").then((cache) => {
-      cache.put("/data.json", jsonResponse);
-    });
-    return await data.id;
-    // try {
-    //   const response = await fetch(`${uri}${nb}`);
-    //   if (response.ok) {
-    //     const data = await response.json();
-    //     cache.put(`${uri}1`, response)
-    //     return await data.id;
-    //   }
-    // } catch (err) {
-    //   throw new Error(err);
-    // })
+const uriu = "https://jsonplaceholder.typicode.com/users/";
+const urip = "https://jsonplaceholder.typicode.com/posts/";
+
+const getPostByAsync = async (uri, nb, name) => {
+  try {
+    const request = new Request(`${uri}${nb}`);
+    const response = await fetch(request);
+    if (response.ok) {
+      caches.open(name).then((cache) => {
+        cache.add(request); // cache.put(request, response) if not from web
+      });
+      caches
+        .match(request)
+        .then((r) => r.json())
+        .then(console.log); // for viewing in the console
+
+      const data = await response.json();
+      if (uri === uriu) {
+        return await data.username;
+      } else if (uri === urip) {
+        return await data.title;
+      }
+    }
+  } catch (err) {
+    throw new Error(err);
   }
 };
 
-const getPostByPromise = (nb) => {
+const getPostByPromise = (uri, nb) => {
   return new Promise((resolve, reject) => {
     fetch(`${uri}${nb}`)
       .then(CheckStatus)
       .then((response) => response.json())
       .then((data) => {
-        resolve(data.id);
+        resolve(data.email);
       })
       .catch((err) => reject(err.message));
   });
 };
 
-export { getPostByAsync, getPostByPromise };
+export { getPostByAsync, getPostByPromise, urip, uriu };
