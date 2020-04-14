@@ -18,7 +18,7 @@ function CheckStatus(response) {
 const uriu = "https://jsonplaceholder.typicode.com/users/";
 const urip = "https://jsonplaceholder.typicode.com/posts/";
 
-const getPostByAsync = async (uri, nb, name) => {
+const getByAsync = async (uri, nb, name) => {
   try {
     const request = new Request(`${uri}${nb}`);
     const response = await fetch(request);
@@ -43,7 +43,7 @@ const getPostByAsync = async (uri, nb, name) => {
   }
 };
 
-const getPostByPromise = (uri, nb) => {
+const getByPromise = (uri, nb) => {
   return new Promise((resolve, reject) => {
     fetch(`${uri}${nb}`)
       .then(CheckStatus)
@@ -55,4 +55,4 @@ const getPostByPromise = (uri, nb) => {
   });
 };
 
-export { getPostByAsync, getPostByPromise, urip, uriu };
+export { getByAsync, getByPromise, urip, uriu };
