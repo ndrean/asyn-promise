@@ -1,5 +1,10 @@
 {
   "dependencies": {
     "node-fetch": "^2.6.0"
-  }
+  },
+  "name": "asyn-promise",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Neven DREAN <nevendrean@yahoo.fr>",
+  "license": "MIT"
 }
