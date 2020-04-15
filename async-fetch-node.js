@@ -24,7 +24,7 @@ const getByAsync = async (uri, nb, name) => {
     caches
       .match(request)
       .then((r) => r.json())
-      .then(console.log); // for viewing in the console
+      .then((json) => console.log(json.data.email)); // for viewing in the console
 
     const result = await response.json();
     return await result.data.email;
@@ -43,11 +43,11 @@ function CheckStatus(response) {
 }
 const getByPromise = (uri, nb) => {
   return new Promise((resolve, reject) => {
-    fetch(`${uri}${nb}`)
+    fetch(uri + nb) // `${uri}${nb}`
       // .then(function (result) {
       //   CheckStatus(result);
       // })
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then((result) => {
         resolve(result.data.email);
       })
@@ -55,4 +55,26 @@ const getByPromise = (uri, nb) => {
   });
 };
 
-export { getByAsync, getByPromise, uriu };
+async function getByAxios(uri, nb) {
+  try {
+    const request = new Request(uri + nb);
+    console.log("obj req ", request);
+    const response = await axios.get(uri + nb);
+
+    if (!response.status === 200) {
+      throw Error(response.statusText);
+    }
+    console.log("axios: ", response.data.data.email);
+    console.log(JSON.stringify(response.data.data));
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+const postByAxios = async (uri, name, job) => {
+  const response = await axios.post(uri, { name, job }); // {name: name, job: job} identique
+
+  console.log("rep :", response);
+};
+
+export { getByAsync, getByPromise, getByAxios, postByAxios, uriu };

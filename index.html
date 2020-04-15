@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .main1 {
+        color: red;
+        font-weight: bold;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <style>
-    .main1 {
-      color: red;
-      font-weight: bold;
-      ;
-    }
+      .main {
+        font-size: 30px;
+      }
+    </style>
+  </head>
 
-    .main {
-      font-size: 30px;
-    }
-  </style>
-</head>
+  <body>
+    <div id="app"></div>
+    <p id="resu1" class="main"></p>
+    <hr />
+    <p id="resu2" class="main"></p>
+    <hr />
+    <p id="resu3" class="main"></p>
+    <p id="resu4" class="main"></p>
+    <p id="resu5" class="main"></p>
+    <p id="resu6" class="main"></p>
 
-<body>
-  <div id="app"></div>
-  <p id="resu1" class="main"></p>
-  <hr>
-  <p id="resu2" class="main"></p>
-  <hr>
-  <p id="resu3" class="main"></p>
-  <p id="resu4" class="main"></p>
-  <p id="resu5" class="main"></p>
-  <p id="resu6" class="main"></p>
-
-  <script type="module" src="./app.js"></script>
-</body>
-
+    <!-- type="module" since we import 'axios' in the script 'app.js' -->
+    <script type="module" src="./app.js"></script>
+    <!-- CDN fro Axios (node based) -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </body>
 </html>

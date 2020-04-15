@@ -1,4 +1,12 @@
-import { getByAsync, getByPromise, uriu } from ".///async-fetch-node.js";
+import {
+  getByAsync,
+  getByPromise,
+  getByAxios,
+  postByAxios,
+  uriu,
+} from ".///async-fetch-node.js";
+
+// const axios = require("axios");
 //import { parallel } from "./async-fetch-node";
 
 const display = (htmlID, response, text) => {
@@ -26,7 +34,7 @@ fetchAll(users, uriu, "All").then();
 const f = async (callback, uri, userID, text, name) => {
   return await callback(uri, userID, name)
     .then((r) => display("#app", r, text))
-    .catch(console.error);
+    .catch((error) => console.log("ind", error));
 };
 // f(getByPromise, 2, "Promise");
 // f(getByAsync, 3, "Async");
@@ -44,10 +52,19 @@ const fetchBatch = async (users, name) => {
     const requests = users.slice(i, i + p).map(async (userID) => {
       return getByPromise(uriu, userID, name)
         .then((r) => display("#resu2", r, "batch"))
-        .catch((err) => console.log(err, userID));
+        .catch((err) => console.log("batch", err, userID));
     });
     await Promise.all(requests); // returns a batch of promises
   }
 };
 fetchBatch(users, "batch").then();
 // https://www.freecodecamp.org/news/promise-all-in-javascript-with-example-6c8c5aea3e32/
+
+getByAxios(uriu, 1);
+postByAxios(uriu, "jo", "dev");
+
+const getAllPageAxios = async (uri, page) => {
+  const rep = await axios.get(uri + "?page=" + page);
+  console.log("All page :", page, " are :", rep.data.data);
+};
+getAllPageAxios(uriu, 1);

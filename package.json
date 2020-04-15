@@ -1,10 +1,13 @@
 {
   "dependencies": {
+    "axios": "^0.19.2",
+    "axios-cache-adapter": "^2.5.0",
     "node-fetch": "^2.6.0"
   },
   "name": "asyn-promise",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Neven DREAN <nevendrean@yahoo.fr>",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": "git@github.com:ndrean/asyn-promise.git"
 }
