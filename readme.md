@@ -8,4 +8,4 @@ Source: https://developers.google.com/web/ilt/pwa/caching-files-with-service-wor
 
 ## Implementation of `new Promise` and `async await` method
 
-## Todo : AXIOS
+## AXIOS in browser (cdn)
