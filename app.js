@@ -1,4 +1,4 @@
-import { getByAsync, getByPromise, uriu, urip } from ".///async-fetch-node.js";
+import { getByAsync, getByPromise, uriu } from ".///async-fetch-node.js";
 //import { parallel } from "./async-fetch-node";
 
 const display = (htmlID, response, text) => {
@@ -12,7 +12,7 @@ const fetchAll = async (listIdUsers, uri, name) => {
   const promises = listIdUsers.map((userID) => {
     return getByAsync(uri, userID, name).then((r) =>
       display("#resu1", r, "parallel")
-    );
+    ); // returns a Promise
   });
   return Promise.all(promises).then();
 };
@@ -30,16 +30,16 @@ const f = async (callback, uri, userID, text, name) => {
 };
 // f(getByPromise, 2, "Promise");
 // f(getByAsync, 3, "Async");
-for (let i = 1; i < 10; i++) {
-  f(getByAsync, urip, i, "Async", "Individual");
+for (let i = 1; i < l; i++) {
+  f(getByAsync, uriu, i, "Async", "Individual");
 }
 
-/**************  par batch de p=5 ****************/
+/**************  par batch de p=3 avec Promise ****************/
 l = 10;
 users = [...new Array(l)].map((x, i) => i + 1);
 
 const fetchBatch = async (users, name) => {
-  const p = 5;
+  const p = 3;
   for (let i = 0; i <= l; i += p) {
     const requests = users.slice(i, i + p).map(async (userID) => {
       return getByPromise(uriu, userID, name)

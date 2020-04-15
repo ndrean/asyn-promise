@@ -3,56 +3,56 @@
 
 // import fetch from "node-fetch";
 
-// helper
-function CheckStatus(response) {
-  if (response.ok) {
-    return response;
-  }
-  let error = new Error(response.statusText);
-  error.response = response;
-  return Promise.reject(error);
-}
-
 //https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker
 
-const uriu = "https://jsonplaceholder.typicode.com/users/";
-const urip = "https://jsonplaceholder.typicode.com/posts/";
+// const uriu = "https://jsonplaceholder.typicode.com/users/";
+// const urip = "https://jsonplaceholder.typicode.com/posts/";
+
+const uriu = "https://reqres.in/api/users/";
 
 const getByAsync = async (uri, nb, name) => {
   try {
     const request = new Request(`${uri}${nb}`);
     const response = await fetch(request);
-    if (response.ok) {
-      caches.open(name).then((cache) => {
-        cache.add(request); // cache.put(request, response) if not from web
-      });
-      caches
-        .match(request)
-        .then((r) => r.json())
-        .then(console.log); // for viewing in the console
-
-      const data = await response.json();
-      if (uri === uriu) {
-        return await data.username;
-      } else if (uri === urip) {
-        return await data.title;
-      }
+    if (!response.ok) {
+      throw new Error(response.statusText);
     }
-  } catch (err) {
-    throw new Error(err);
+
+    caches.open(name).then((cache) => {
+      cache.add(request); // cache.put(request, response) if not from web
+    });
+    caches
+      .match(request)
+      .then((r) => r.json())
+      .then(console.log); // for viewing in the console
+
+    const result = await response.json();
+    return await result.data.email;
+  } catch (error) {
+    console.log(error);
   }
 };
-
+/********************     Promise    **************/
+// helper
+function CheckStatus(response) {
+  if (response.status >= 200 && response.status < 300) {
+    return Promise.resolve(response);
+  } else {
+    return Promise.reject(new Error(response.statusText));
+  }
+}
 const getByPromise = (uri, nb) => {
   return new Promise((resolve, reject) => {
     fetch(`${uri}${nb}`)
-      .then(CheckStatus)
+      // .then(function (result) {
+      //   CheckStatus(result);
+      // })
       .then((response) => response.json())
-      .then((data) => {
-        resolve(data.email);
+      .then((result) => {
+        resolve(result.data.email);
       })
       .catch((err) => reject(err.message));
   });
 };
 
-export { getByAsync, getByPromise, urip, uriu };
+export { getByAsync, getByPromise, uriu };
