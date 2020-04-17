@@ -57,9 +57,10 @@ promises
   .reduce((promiseChain, currentPromise) => {
     return promiseChain.then((result) => {
       return currentPromise.then((currentResult) => {return [...result, currentResult}]);
-  // we created an array
+  // we return an array that is used as "arrayOfResults"
     });
-  }, Promise.resolve([]))
+  }, Promise.resolve([])) // the initial value
+  // we use the result array (simply indexes) to render in the browser
   .then((arrayOfResults) => {
     console.log(arrayOfResults);
     arrayOfResults.forEach((result) => {
@@ -67,18 +68,6 @@ promises
       display("#resu8", result, "Seq :");
     });
   });
-```
-
-```javascript
-new Promise((resolve, _) => {
-  return Promise.resolve() // Initial promise that will always resolve
-    .then((result) => {
-      return promise1;
-    })
-    .then((result) => {
-      return promise2;
-    });
-});
 ```
 
 ## AXIOS
