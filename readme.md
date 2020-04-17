@@ -4,9 +4,8 @@ Source:
 
 - https://web.dev/promises/
 - https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker
-- https://css-tricks.com/why-using-reduce-to-sequentially-resolve-promises-works/
-
-- https://decembersoft.com/posts/promises-in-serial-with-array-reduce/
+- https://golb.hplar.ch/2018/01/A-closer-look-at-the-Cache-API.html
+- https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/reduce
 
 ## Promise.then().catch() and Async/await/try/catch and cache API
 
@@ -26,35 +25,65 @@ We use the same `Promise.all` but this time we slice the array of 'usersId' into
 
 ## Sequential fetching
 
-Suppose we have a fixed number of tasks/promises. If we simply do `return promise1.then(promise2).then(promise3)`, we can't capture the return values. If we do:
+Suppose we have a fixed number of tasks/promises. If we simply do `promise1.then(promise2).then(promise3)`, we can't capture the return values. Then we can do:
 
 ```javascript
-return promise1
-  .then((result1) =>
-    promise2.then((result2) =>
-      promise3.then((result3) => [result1, resul2, result3])
-    )
-  )
-  .then((arrayOfResults) => {
-    //do something
+Promise.resolve()
+  .then((r) => {
+    return promise1.then((r) => display(...));
+  })
+  .then((r) => {
+    return promise2.then((r) => display(...));
+  })
+  .then((r) => {
+    return promise3.then((r) => display(...));
   });
 ```
 
-If we have dynamic promises, the idea is to use `reduce()` to collapse the array of promises into a single promise chain.
-The initial value will be a promise that immediately resolves into an empty array: `initialPromise = Promise.Resolve([]`), so `promiseChain === initialPromise` on the first time through the function.
+https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/reduce
+
+If we have dynamic promises, we put all the promises in an array and use `reduce()` to collapse the array of promises into a single promise chain.
+The `reduce()` method executes a provided callback function `callback` which takes the `previousValue` and `currentValue` which iterates over the array. The function stores the result in the `accumulator` which will be the `previousValue`. It uses and initial value. Here, we take `Promise.resolve([])`, a promise that always resolves to an empty array as the initial value. Then `accumulator === initialValue` on the first time through the callback.
+We will capture the result in an array, called `arrayOfResults` further used to display the
+results in the browser.
 
 ```javascript
-return [task1, task2, task3]
-  .reduce((promiseChain, currentTask) => {
-    f(promiseChain, currentTask);
-  }, (initialPromise = Promise.resolve([])))
-  .then();
+myArrayOfPromises.reduce(callback, Promise.resolve([]));
 
-function f(promiseChain, currentTask) {
-  return promiseChain.then((chainResults) => {
-    currentTask.then((currentResult) => [...chainResults, currentResult]);
+const callback = (promisesAccumulator, currentPromise) => {
+  return promisesAccumulator.then(currentPromise);
+};
+```
+
+We
+
+```javascript
+promises
+  .reduce((promiseChain, currentPromise) => {
+    return promiseChain.then((result) => {
+      return currentPromise.then((currentResult) => {return [...result, currentResult}]);
+  // we created an array
+    });
+  }, Promise.resolve([]))
+  .then((arrayOfResults) => {
+    console.log(arrayOfResults);
+    arrayOfResults.forEach((result) => {
+      console.log(result);
+      display("#resu8", result, "Seq :");
+    });
   });
-}
+```
+
+```javascript
+new Promise((resolve, _) => {
+  return Promise.resolve() // Initial promise that will always resolve
+    .then((result) => {
+      return promise1;
+    })
+    .then((result) => {
+      return promise2;
+    });
+});
 ```
 
 ## AXIOS and cache in browser (cdn)

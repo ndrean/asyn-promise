@@ -1,14 +1,8 @@
-//  npm i node-fetch --save (to install fetch with node.js)
-//const fetch = require("node-fetch"); //no need in browser
-
-// import fetch from "node-fetch";
-
-//https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker
-
 // const uriu = "https://jsonplaceholder.typicode.com/users/";
-// const urip = "https://jsonplaceholder.typicode.com/posts/";
+// const uriu = "https://jsonplaceholder.typicode.com/posts/";
 
 const uriu = "https://reqres.in/api/users/";
+// const uriu = "http://dummy.restapiexample.com/api/v1/employee/";
 
 const getByAsync = async (uri, nb, cacheName) => {
   try {
@@ -25,98 +19,70 @@ const getByAsync = async (uri, nb, cacheName) => {
     //display in console from cache
     const responseFromCache = await caches.match(request);
     const matchedCachedObj = await responseFromCache.json();
-    console.log("cachedObj async/await ", matchedCachedObj.data.email);
+    // console.log("cachedObj async/await ", matchedCachedObj.data.email);
 
-    const result = await response.json();
-
-    return await result.data.id;
+    const json = await response.json();
+    return await json.data.id;
   } catch (error) {
-    console.log(error.statusText);
+    throw error;
   }
 };
 /********************     Promise    **************/
 // add origin header on request
 
-const getByPromise = async (uri, nb, cacheName) => {
-  const request = uri + nb;
-  const promise = new Promise((resolve, reject) => {
-    fetch(request)
-      .then((response) => {
-        if (!response.ok) reject(error.statusText);
-        resolve(response);
-      })
-      .catch((error) => console.log(error));
-  });
-  return promise
-    .then((response) => response.json())
-    .then((result) => {
-      return result.data.id;
-    })
-    .then(
-      // saving in cache
-      caches.open(cacheName).then((cache) => {
-        cache.add(request); // cache.put(request, response) if not from web
-      })
-    )
-    .then(
-      // displaying cache in console
-      caches
-        .match(request)
-        .catch((err) => {
-          throw err.statusText;
-        })
-        .then((r) => r.json())
-        .then((json) => console.log("from cache :", json.data.email))
-        .catch((err) => console.log(err.message))
-    )
-    .catch((err) => {
-      throw err.statusText;
-      // console.log(err);
-      // reject(err.message);
-    });
+// helper
+const checkStatus = (response) => {
+  if (!response.ok) {
+    return Promise.reject(new Error(response));
+  }
+  return Promise.resolve(response);
 };
 
-async function getByAxios(uri, nb) {
-  try {
-    const response = await axios.get(uri + nb);
-
-    if (!response.status === 200) {
-      // console.log(response.statusText);
-      throw Error(response.statusText);
-    }
-    return await response.data.data;
-    console.log("axios: ", response.data.data.email);
-    console.log(JSON.stringify(response.data.data));
-  } catch (error) {
-    console.log(error.message);
-  }
-}
+const getByPromise = async (uri, nb, cacheName) => {
+  const request = uri + nb;
+  return (
+    fetch(request)
+      .then(checkStatus)
+      .then((result) => result.json())
+      .then((response) => {
+        return response.data.id;
+      })
+      // saving in cache
+      .then(
+        caches.open(cacheName).then((cache) => {
+          cache.add(request); // cache.put(request, response) if not from web
+        })
+      )
+      // displaying cache in console
+      .then(
+        caches
+          .match(request)
+          .then(checkStatus)
+          .then((r) => r.json())
+        // .then((json) => console.log("from cache :", json.data.email))
+      )
+      .catch((err) => console.log("BAD PROMISE :", err.message))
+  );
+};
 
 const postByAxios = async (uri, name, job) => {
-  try {
-    const response = await axios.post(uri, { name, job }); // {name: name, job: job} identique
-  } catch (e) {
-    console.log(e.message);
-    // throw e;
-  }
+  return await axios.post(uri, { name, job }); // {name: name, job: job} identique
 };
 
 const getAllPageAxios = async (uri, page) => {
-  try {
-    const pageResponse = await axios.get(uri + "?page=" + page);
-    const arrayResponse = pageResponse.data.data;
-    arrayResponse.forEach((response) => {
-      display(
-        "#resu5",
-        JSON.stringify(response.id),
-        "Axios await all page " + page
-      );
-    });
-  } catch (err) {
-    throw new Error(err.message);
+  const pageResponse = await axios.get(uri + "?page=" + page);
+  if (pageResponse === undefined) {
+    return;
   }
+  const result = pageResponse.data.data;
+  return result.forEach((response) => {
+    display(
+      "#resu5",
+      JSON.stringify(response.id),
+      "Axios await all page " + page
+    );
+  });
 };
-
 const display = (htmlID, response, text) => {
   document
     .querySelector(htmlID)
@@ -130,7 +96,6 @@ export {
   display,
   getByAsync,
   getByPromise,
-  getByAxios,
   postByAxios,
   getAllPageAxios,
   uriu,
