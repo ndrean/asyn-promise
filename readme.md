@@ -14,9 +14,9 @@
 Two versions of fetch:
 
 - `new Promise` with `resolve/reject` and `then()` chaining
-- `async await` iwth try/catch.
+- `async await` with `try/catch`.
 
-The cache API is also implemented with await and then() versions
+The `cache API` is also implemented with `await` and `then()` versions
 
 ## Promise.All for parallel fetching
 
