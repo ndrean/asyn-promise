@@ -7,21 +7,24 @@ Source:
 - https://golb.hplar.ch/2018/01/A-closer-look-at-the-Cache-API.html
 - https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/reduce
 
-## Promise.then().catch() and Async/await/try/catch and cache API
+## Fetch promises and cache API
 
-Two versions of fetch. Implemented the cache API (await and then() version)
+Two versions of fetch:
+
+- `new Promise` with `resolve/reject` and `then()` chaining
+- `async await` iwth try/catch.
+
+The cache API is also implemented with await and then() versions
 
 ## Promise.All for parallel fetching
 
 We just call `Promise.all([arrayOfPromises]])`. In our example, we perform an indexed `fetch` on an API. Then we `map` the array of 'usersId' to get a promise and this returns an array of promises.
 
-## Batch fetching
+## Batch fetching.
 
 We use the same `Promise.all` but this time we slice the array of 'usersId' into smaller arrays and loop through these subarrays. Here, we indexedFrom the the `newArray = array.slice(startIndex, endIndex)` and execute `Promise.all(newArray)`.
 
 > source: https://www.freecodecamp.org/news/promise-all-in-javascript-with-example-6c8c5aea3e32/
-
-## `new Promise` and `async await` method
 
 ## Sequential fetching
 
@@ -46,16 +49,6 @@ If we have dynamic promises, we put all the promises in an array and use `reduce
 The `reduce()` method executes a provided callback function `callback` which takes the `previousValue` and `currentValue` which iterates over the array. The function stores the result in the `accumulator` which will be the `previousValue`. It uses and initial value. Here, we take `Promise.resolve([])`, a promise that always resolves to an empty array as the initial value. Then `accumulator === initialValue` on the first time through the callback.
 We will capture the result in an array, called `arrayOfResults` further used to display the
 results in the browser.
-
-```javascript
-myArrayOfPromises.reduce(callback, Promise.resolve([]));
-
-const callback = (promisesAccumulator, currentPromise) => {
-  return promisesAccumulator.then(currentPromise);
-};
-```
-
-We
 
 ```javascript
 promises
@@ -86,4 +79,4 @@ new Promise((resolve, _) => {
 });
 ```
 
-## AXIOS and cache in browser (cdn)
+## AXIOS
