@@ -1,13 +1,15 @@
-https://fetch-cache.surge.sh
+##Live demo app at:
 
-Source:
+> https://fetch-cache.surge.sh
+
+### Sources:
 
 - https://web.dev/promises/
 - https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker
 - https://golb.hplar.ch/2018/01/A-closer-look-at-the-Cache-API.html
 - https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/reduce
 
-## Fetch promises and cache API
+## Versions of fetch promises and cache API
 
 Two versions of fetch:
 
