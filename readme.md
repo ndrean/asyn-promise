@@ -5,11 +5,11 @@ We just render the ids in the browser to view the result of testing some fetch c
 - [parallel](#parallel-fetching) fetching by using `promise.all()` on an array of promises
 - [sequential](#sequential-fetching) fetching by using `reduce()` on an array of promises
 - [batch](#batch-fetching) fetching with `array.slice()` and then `promise.all()` to fetch by batch
-- [background-fetch](#background-fetch) TODO [background fetch][1]
+- [indexedDB](#indexedDB) TODO
 
-The data is saved in `cache`. TODO: `indexedDB
+The data is saved in `cache`.
 
-[1]: https://developers.google.com/web/updates/2018/12/background-fetch#how_it_works "background fetch"
+TODO: `indexedDB`
 
 ### Live demo app at:
 
@@ -100,7 +100,13 @@ Implementation of alternative library `Axios`: looping, page fetching and post.
 
 ---
 
-## Background fetch
+## IndexedDB
+
+The file _index.js_ contains the code for _indexedDB_; more precisely, here we use `idb`, so we need the `npm` package `browserify` it to bundle inside a new _bundle.js_ file. This last one is called by a script in _index.html_.
+In the _index.js_ file, we require _require('idb')_
+
+> > yarn add idb browserify</p>
+> > browserifiy index.js -o bundle.js
 
 ## Error handling
 

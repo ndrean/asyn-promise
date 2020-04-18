@@ -5,7 +5,9 @@ import {
   uriu,
   display,
 } from ".///functions.js";
-
+if ("BackgroundFetchManager" in self) {
+  // This browser supports Background Fetch!
+}
 let l = 12; // max number of users in this API
 
 // create an array [1,2,3,...,l]

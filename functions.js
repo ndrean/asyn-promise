@@ -51,7 +51,7 @@ const getByPromise = async (uri, nb, cacheName) => {
   const request = uri + nb;
   return (
     fetch(request)
-      .then(checkStatus)
+      .then((response) => checkStatus(response))
       .then((result) => result.json())
       .then((response) => {
         return response.data.id;
