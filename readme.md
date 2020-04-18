@@ -138,7 +138,9 @@ We wi
 
 ## Note on IndexedDB
 
-If we want to work with `indexedDB`, we can use the `npm` package [idb][1]. To do so, we have a working file _index.js_ that contains the code using `idb`. To use it, we need to require the module `idb`, so we need the `npm` package [browserify][2]
+### browserify
+
+If we want to work with `indexedDB`, we can use the `npm` package [idb][1]. To do so, we have a working file _index.js_ that contains the code using `idb`. To use it, we need to require the module `idb`, so we need to bundle it. We can use a quick tool such as the `npm` package [browserify][2]:
 
 > Browserify lets you require('modules') in the browser by bundling up all of your dependencies.
 
@@ -149,6 +151,33 @@ If we want to work with `indexedDB`, we can use the `npm` package [idb][1]. To d
 
 [1]: https://www.npmjs.com/package/idb "idb"
 [2]: http://browserify.org/ "browserify"
+
+### parcel
+
+We can also use `parcel` with ease.
+
+> yarn add parcel-bundler --dev
+
+We need a file `index.html` and create a file at `/src/index.js`. The link to this file should be declared in the _index.html_ file with:
+
+`<script type="module" src="src/index.js"></script>`
+
+and then add the followings scripts to the `package.json` file (create with `yarn init`):
+`{ "main": "src/index.js", "scripts": { "serve": "parcel index.html", "build": "parcel build index.html", "test": "echo \"Error: no test specified\" && exit 1" }, }`
+
+To serve the file with a web server, we run:
+
+```bash
+  npm run serve (-p 1234)
+```
+
+and when ready to build it (optimisation for production), we run:
+
+```bash
+  npm run build
+```
+
+and then go to `http://localhost:1234/`.
 
 ## Error handling
 

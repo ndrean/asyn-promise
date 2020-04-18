@@ -8,5 +8,8 @@
   "author": "Neven DREAN <nevendrean@yahoo.fr>",
   "license": "MIT",
   "repository": "git@github.com:ndrean/asyn-promise.git",
-  "description": "fetch loop, parallel, batch, sequential and background in browser and saving in cache and indexedDB"
+  "description": "fetch loop, parallel, batch, sequential and background in browser and saving in cache and indexedDB",
+  "devDependencies": {
+    "parcel": "^1.12.4"
+  }
 }
