@@ -54,7 +54,6 @@ for (let i = 1; i <= l; i++) {
 }
 
 /**************  batch of length p with Promise.then syntax ****************/
-// https://www.freecodecamp.org/news/promise-all-in-javascript-with-example-6c8c5aea3e32/
 
 const fetchBatch = async (users, name) => {
   const p = 4;
@@ -72,8 +71,7 @@ const fetchBatch = async (users, name) => {
 
 fetchBatch(arrayOfUsersId, "batch").catch((error) => console.log(error));
 
-// https://www.freecodecamp.org/news/promise-all-in-javascript-with-example-6c8c5aea3e32/
-
+/*******************************************/
 /* Sequential with Reduce */
 
 // create an array of promises
