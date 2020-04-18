@@ -26,6 +26,7 @@ const fetchAll = async (arrayOfIds, uri, name) => {
         (r) => display("#resu1", r, "Parallel :") //.catch((error) => console.log(error))
       );
     });
+    console.log(arrayOfPromises);
     return Promise.all(arrayOfPromises).catch((error) => console.log(error));
   } catch (err) {
     // console.log(err.message);
@@ -47,16 +48,10 @@ const line = async () => {
 };
 /********* Simple loop ************/
 for (let i = 1; i <= l; i++) {
-  f(getByAsync, uriu, i, "Loop await", "Ind_Async")
+  f(getByAsync, uriu, i, "Loop Await", "Ind_Async")
     .then(f(getByPromise, uriu, i, "Loop Promise", "Ind_Promise"))
     .catch((error) => console.log(error));
 }
-
-/* Simple loop squential */
-
-// for (let i = 1; i <= l; i++) {
-//   f(getByAsync, uriu, i, "Loop on index", "Ind_Async");
-// }
 
 /**************  batch of length p with Promise.then syntax ****************/
 // https://www.freecodecamp.org/news/promise-all-in-javascript-with-example-6c8c5aea3e32/
@@ -67,14 +62,14 @@ const fetchBatch = async (users, name) => {
   for (let i = 0; i <= l; i += p) {
     const slicedRequests = users.slice(i, i + p).map(async (userID) => {
       return getByPromise(uriu, userID, name).then((r) =>
-        display("#resu2", r, "Batch :" + i)
+        display("#resu2", r, "(Batch: # " + i + ")")
       );
       // .catch((err) => console.log("batch", err, userID));
     });
     await Promise.all(slicedRequests); // returns a batch of promises
   }
 };
-fetchBatch(arrayOfUsersId, "Batch :").catch((error) => console.log(error));
+fetchBatch(arrayOfUsersId, "batch").catch((error) => console.log(error));
 
 // https://www.freecodecamp.org/news/promise-all-in-javascript-with-example-6c8c5aea3e32/
 
@@ -85,7 +80,7 @@ const arrayOfSortedPromises = () => {
   let array = [];
   arrayOfUsersId.forEach((i) => {
     // array = [...array, getByPromise(uriu, i, "Seq")];
-    array.push(getByPromise(uriu, i, "Sequential Loop"));
+    array.push(getByAsync(uriu, i, "Sequential"));
   });
   return array;
 };
@@ -101,7 +96,7 @@ promises
     console.log(arrayOfResults);
     arrayOfResults.forEach((result) => {
       console.log(result);
-      display("#resu8", result, "Seq :");
+      display("#resu8", result, "Sequence ");
     });
   });
 
