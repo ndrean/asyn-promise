@@ -1,8 +1,6 @@
 {
   "dependencies": {
-    "axios": "^0.19.2",
-    "browserify": "^16.5.1",
-    "idb": "^5.0.2"
+    "axios": "^0.19.2"
   },
   "name": "fetch-browser",
   "version": "1.0.0",

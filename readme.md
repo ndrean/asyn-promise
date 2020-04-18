@@ -100,9 +100,36 @@ Implementation of alternative library `Axios`: looping, page fetching and post.
 
 ---
 
-## IndexedDB
+## cache
 
-The working file _index.js_ contains the code for `indexedDB`. Here we will use the `npm` package [idb][1], so we need the `npm` package [browserify][2]
+We can use the cache to store `http GET` (only GET). To do so, we just declare a _cache_
+by giving it a name and add the name _request_ which has a _response_ with the _fetch_.
+
+```javascript
+const newCache = await caches.open("cacheName");
+await newCache.add(request);
+// await cache.put(request, response) if not from web
+```
+
+To review it, we can inspect _Application/cache_ in Chrome or display ot in the console
+with the snippet below:
+
+```javascript
+const request = new Request(url);
+const response = await fetch(request);
+const responseFromCache = await caches.match(request);
+const matchedCachedObj = await responseFromCache.json();
+// review in the console:
+console.log("cacheName", matchedCachedObj.data.email);
+```
+
+## Workbox
+
+We wi
+
+## Note on IndexedDB
+
+If we want to work with `indexedDB`, we can use the `npm` package [idb][1]. To do so, we have a working file _index.js_ that contains the code using `idb`. To use it, we need to require the module `idb`, so we need the `npm` package [browserify][2]
 
 > Browserify lets you require('modules') in the browser by bundling up all of your dependencies.
 
