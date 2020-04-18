@@ -1,14 +1,14 @@
 Demo of different `fetch` constructions **client-side** with a public API (endpoint: "https://reqres.in/api/users/" supporting `CORS` and `https`).
 We just render the ids in the browser to view the result of testing some fetch chaining strategies:
 
-- [simple loop](#versions-of-fetch-and-cache-API) with 2 construcions (`async/await` and `promise.then()`)
-- [parallel](#parallel-fetching) fetching by using `promise.all()` on an array of promises
-- [sequential](#sequential-fetching) fetching by using `reduce()` on an array of promises
-- [batch](#batch-fetching) fetching with `array.slice()` and then `promise.all()` to fetch by batch
+- [Simple loop](#versions-of-fetch-and-cache-API) with 2 constructions: `async/await` and `promise.then()`
+- [Parallel](#parallel-fetching) fetching by using `promise.all()` on an array of promises
+- [Sequential](#sequential-fetching) fetching by using `reduce()` on an array of promises
+- [Batch](#batch-fetching) fetching with `array.slice()` and then `promise.all()` to fetch by batch
 - [Cache](#cache) Short explanation of the implementation of storing fetch GET request into the cache
-  = [Workbox](#workbox) Setup and usage of `workbox`
+- Setup and usage of [Workbox](#workbox)
 - [Axios](#axios)
-- [indexedDB](#indexedDB) Note
+- Note on [indexedDB](#indexedDB)
 
 The data is saved in `cache`.
 
