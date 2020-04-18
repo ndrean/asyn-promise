@@ -103,23 +103,27 @@ Implementation of alternative library `Axios`: looping, page fetching and post.
 ## cache
 
 We can use the cache to store `http GET` (only GET). To do so, we just declare a _cache_
-by giving it a name and add the name _request_ which has a _response_ with the _fetch_.
-
-```javascript
-const newCache = await caches.open("cacheName");
-await newCache.add(request);
-// await cache.put(request, response) if not from web
-```
-
-To review it, we can inspect _Application/cache_ in Chrome or display ot in the console
-with the snippet below:
+by giving it a name and add a stringified key/value `{request: reponse}` (just _request_ in case of an http fetch).
 
 ```javascript
 const request = new Request(url);
 const response = await fetch(request);
+// create/open a new named cache
+const newCache = await caches.open("cacheName");
+// add the {request:response}
+await newCache.add(request);
+// await cache.put(request, response) if not from web
+```
+
+To review it, we can inspect _Application/cache_ in Chrome or display it in the console
+with the snippet below:
+
+```javascript
+// we look for the request in the cache
 const responseFromCache = await caches.match(request);
+// then we parse it
 const matchedCachedObj = await responseFromCache.json();
-// review in the console:
+// and review in the console:
 console.log("cacheName", matchedCachedObj.data.email);
 ```
 
