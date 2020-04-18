@@ -96,7 +96,6 @@ promises
   .then((arrayOfResults) => {
     console.log(arrayOfResults);
     arrayOfResults.forEach((result) => {
-      console.log(result);
       display("#resu8", result, "Sequence ");
     });
   });

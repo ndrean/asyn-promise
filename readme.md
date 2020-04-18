@@ -12,6 +12,8 @@ We just render the ids in the browser to view the result of testing some fetch c
 
 We also implement caching.
 
+> TODO: background fetch (https://developers.google.com/web/updates/2018/12/background-fetch#how_it_works)
+
 ### Sources:
 
 - https://web.dev/promises/
@@ -85,3 +87,5 @@ We use the same `Promise.all` but this time we slice the array of 'usersId' into
 ## AXIOS
 
 Implementation of alternative library `Axios`: looping, page fetching and post.
+
+## TODO: background fetch

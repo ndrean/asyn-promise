@@ -19,7 +19,7 @@ const getByAsync = async (uri, nb, cacheName) => {
     //display in console from cache
     const responseFromCache = await caches.match(request);
     const matchedCachedObj = await responseFromCache.json();
-    // console.log("cachedObj async/await ", matchedCachedObj.data.email);
+    console.log("cachedObj async/await ", matchedCachedObj.data.email);
 
     const json = await response.json();
     return await json.data.id;
