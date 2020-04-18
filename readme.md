@@ -152,15 +152,86 @@ If we want to work with `indexedDB`, we can use the `npm` package [idb][1]. To d
 [1]: https://www.npmjs.com/package/idb "idb"
 [2]: http://browserify.org/ "browserify"
 
+### Webpack
+
+```bash
+yarn add webpack webpack-cli -D @webpack-cli/serve
+```
+
+then
+
+```bash
+yarn init
+```
+
+then we build two config files:
+
+```javascript
+# package.json
+{
+
+}
+
+# webpack.config.js
+const webpack = require("webpack");
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+const config = {
+  mode: 'development',
+  entry: "./src/index.js",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+  },
+  devtool: "inline-source-map",
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: "index.html",
+    }),
+  ],
+};
+
+module.exports = config;
+
+```
+
 ### parcel
 
-We can also use `parcel` with ease.
+We can also use `parcel`. Since we are using `async/await`, we limited the accepted list
+of browsers to:
 
-> yarn add parcel-bundler --dev
+```javascript
+#package.json
 
-We need a file `index.html` and create a file at `/src/index.js`. The link to this file should be declared in the _index.html_ file with:
+browserslist": [
+    "since 2017-06"
+  ]
+```
 
-`<script type="module" src="src/index.js"></script>`
+Then
+
+```bash
+yarn add parcel-bundler --dev
+yarn add axios
+```
+
+For using `Axios`, instead of using the cdn
+
+`<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>`
+
+we import the package and add:
+
+```javascript
+import axios from "axios";
+```
+
+in the Javascript files where needed.
+
+We need a file `index.html` and create a directory `/src` and put all our files inside.
+The main js file will be named `/src/index.js`. The link to this file should be declared in the _index.html_ file **without tye="module"**.
+
+`<script <del>type="module"<del> src="src/index.js"></script>`
 
 and then add the followings scripts to the `package.json` file (create with `yarn init`):
 `{ "main": "src/index.js", "scripts": { "serve": "parcel index.html", "build": "parcel build index.html", "test": "echo \"Error: no test specified\" && exit 1" }, }`

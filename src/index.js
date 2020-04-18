@@ -4,10 +4,12 @@ import {
   getAllPageAxios,
   uriu,
   display,
-} from ".///functions.js";
-if ("BackgroundFetchManager" in self) {
-  // This browser supports Background Fetch!
-}
+} from "./functions.js";
+
+// parcel bundler
+import axios from "axios";
+// const axios = require("axios").default;
+
 let l = 12; // max number of users in this API
 
 // create an array [1,2,3,...,l]
@@ -17,14 +19,13 @@ const arrayOfUsersId = [...Array(l)].map((_, i) => i + 1);
 const fetchAll = async (arrayOfIds, uri, name) => {
   try {
     // create an array of promises
-    const arrayOfPromises = arrayOfIds.map((userID) => {
+    const arrayOfPromises = arrayOfIds.map(async (userID) => {
       // Id => return a promise
-      return getByAsync(uri, userID, name).then(
-        (r) => display("#resu1", r, "Parallel ") //.catch((error) => console.log(error))
-      );
+      const r = await getByAsync(uri, userID, name);
+      return display("#resu1", r, "Parallel ");
     });
     // console.log(arrayOfPromises);
-    return Promise.all(arrayOfPromises).catch((error) => console.log(error));
+    return await Promise.all(arrayOfPromises);
   } catch (err) {
     throw err.message;
   }
@@ -35,13 +36,12 @@ fetchAll(arrayOfUsersId, uriu, "All").catch((error) => console.log(error));
 /********* Simple loop ************/
 // Helper
 const f = async (callback, uri, userID, consoleText, cacheName) => {
-  return await callback(uri, userID, cacheName)
-    .then((r) => display("#start", r, consoleText))
-    .catch((error) => console.log("ind", error));
-};
-
-const line = async () => {
-  document.querySelector("#start").insertAdjacentHTML("beforeend", "<hr/>");
+  try {
+    const result = await callback(uri, userID, cacheName);
+    return display("#start", result, consoleText);
+  } catch (error) {
+    console.log("ind", error);
+  }
 };
 
 for (let i = 1; i <= l; i++) {
@@ -56,7 +56,7 @@ const fetchBatch = async (users, name) => {
   const p = 4;
   for (let i = 0; i <= l; i += p) {
     const slicedRequests = users.slice(i, i + p).map(async (userID) => {
-      return getByPromise(uriu, userID, name).then((r) =>
+      return getByAsync(uriu, userID, name).then((r) =>
         display("#resu2", r, "(Batch: # " + i + ")")
       );
       // .catch((err) => console.log("batch", err, userID));

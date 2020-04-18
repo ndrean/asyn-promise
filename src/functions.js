@@ -1,8 +1,10 @@
 // const uriu = "https://jsonplaceholder.typicode.com/users/";
 // const uriu = "https://jsonplaceholder.typicode.com/posts/";
 
+// const axios = require("axios").default;
+import axios from "axios";
+
 const uriu = "https://reqres.in/api/users/";
-// const uriu = "http://dummy.restapiexample.com/api/v1/employee/";
 
 const display = (htmlID, response, text) => {
   document
@@ -28,7 +30,7 @@ const getByAsync = async (uri, nb, cacheName) => {
     //display in console from cache
     const responseFromCache = await caches.match(request);
     const matchedCachedObj = await responseFromCache.json();
-    console.log("cachedObj async/await ", matchedCachedObj.data.email);
+    // console.log("cachedObj async/await ", matchedCachedObj.data.email);
 
     const json = await response.json();
     return await json.data.id;
@@ -51,7 +53,7 @@ const getByPromise = async (uri, nb, cacheName) => {
   const request = uri + nb;
   return (
     fetch(request)
-      .then((response) => checkStatus(response))
+      .then((res) => checkStatus(res))
       .then((result) => result.json())
       .then((response) => {
         return response.data.id;
@@ -66,9 +68,8 @@ const getByPromise = async (uri, nb, cacheName) => {
       .then(
         caches
           .match(request)
-          .then(checkStatus)
           .then((r) => r.json())
-          .then((json) => console.log("from cache :", json.data.first_name))
+          .then((rjson) => console.log("from cache :", rjson.data.first_name))
       )
       .catch((err) => console.log("BAD PROMISE :", err.message))
   );
@@ -89,4 +90,4 @@ const getAllPageAxios = async (uri, page) => {
   });
 };
 
-export { display, getByAsync, getByPromise, getAllPageAxios, uriu };
+export { display, getByAsync, getByPromise, uriu, getAllPageAxios };
