@@ -4,7 +4,8 @@ We just render the ids in the browser to view the result of testing some fetch c
 - [simple loop](#versions-of-fetch-and-cache-API) with 2 construcions (`async/await` and `promise.then()`)
 - [parallel](#parallel-fetching) fetching by using `promise.all()` on an array of promises
 - [sequential](#sequential-fetching) fetching by using `reduce()` on an array of promises
-- [batch](#batch-fetching) fetching with `array.slice()` and then `promise.all()` to fetch by batch -[background-fetch](#background-fetch) TODO: [background fetch][1]
+- [batch](#batch-fetching) fetching with `array.slice()` and then `promise.all()` to fetch by batch
+- [background-fetch](#background-fetch) TODO: [background fetch][1]
 
 We also implement caching.
 
