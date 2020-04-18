@@ -23,7 +23,7 @@ const fetchAll = async (arrayOfIds, uri, name) => {
     const arrayOfPromises = arrayOfIds.map((userID) => {
       // Id => return a promise
       return getByAsync(uri, userID, name).then(
-        (r) => display("#resu1", r, "Parallel :") //.catch((error) => console.log(error))
+        (r) => display("#resu1", r, "Parallel ") //.catch((error) => console.log(error))
       );
     });
     console.log(arrayOfPromises);
@@ -126,10 +126,6 @@ for (let i = 1; i <= l; i++) {
     console.log("AXIOS", err);
   }
 }
-
-axios(uriu + 1)
-  .then((r) => display("#resu7", r.data.data.id, "Axios "))
-  .catch((err) => console.log("AXIOS", err));
 
 getAllPageAxios(uriu, 1).catch((err) => console.log("Page AXIOS", err));
 

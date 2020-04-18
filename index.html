@@ -18,20 +18,26 @@
 </head>
 
 <body>
+  <h1>Different <strong>http GET</strong> requests from the browser</h1>
+  <hr>
   <h3 class="title">Simple loop on http requests with <strong>promise.then()</strong> and <strong>async-await</strong>
+    <p>Two lot of GET request are run, and the rendered ids are not necessarilly ordered</p>
   </h3 class="title">
   <div id="start"></div>
   <hr>
 
 
-  <h3 class="title">Parallel fetch with <strong>Promise.all()</strong></h3 class="title">
+  <h3 class="title">Parallel fetch with <strong>Promise.all()</strong></h3>
+  <p>A lot of 12 GET request is run, and the rendered ids are not necessarily ordered</p>
   <p id="resu1" class="main"></p>
   <hr />
   <h3 class="title">Sequential loop fetch with a arrayOfPromises.reduce()</h3>
+  <p>The rendered ids will always be ordered</p>
   <p id="resu8" class="main"></p>
   <hr>
 
   <h3 class="title">Batch fetch with <strong>slice - promise.all()</strong></h3 class="title">
+  <p>The ids are rendered by batch of 4 and are not necessarilly ordered within a batch</p>
   <p id="resu2" class="main"></p>
   <hr />
 

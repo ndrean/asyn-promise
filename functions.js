@@ -4,6 +4,15 @@
 const uriu = "https://reqres.in/api/users/";
 // const uriu = "http://dummy.restapiexample.com/api/v1/employee/";
 
+const display = (htmlID, response, text) => {
+  document
+    .querySelector(htmlID)
+    .insertAdjacentHTML(
+      "beforeend",
+      `<span>${text}: ${response}  &nbsp | &nbsp</span> `
+    );
+};
+
 const getByAsync = async (uri, nb, cacheName) => {
   try {
     const request = new Request(`${uri}${nb}`);
@@ -79,17 +88,9 @@ const getAllPageAxios = async (uri, page) => {
     display(
       "#resu5",
       JSON.stringify(response.id),
-      "Axios await all page " + page
+      "(Axios await all page " + page + ")"
     );
   });
-};
-const display = (htmlID, response, text) => {
-  document
-    .querySelector(htmlID)
-    .insertAdjacentHTML(
-      "beforeend",
-      `<span>${text}: ${response}  &nbsp | &nbsp</span> `
-    );
 };
 
 export {
