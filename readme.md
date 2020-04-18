@@ -5,7 +5,7 @@ We just render the ids in the browser to view the result of testing some fetch c
 - [Parallel](#parallel-fetching) fetching by using `promise.all()` on an array of promises
 - [Sequential](#sequential-fetching) fetching by using `reduce()` on an array of promises
 - [Batch](#batch-fetching) fetching with `array.slice()` and then `promise.all()` to fetch by batch
-- [Cache](#cache) Short explanation of the implementation of storing fetch GET request into the cache
+- Short explanation of the implementation of storing fetch GET request into the [cache](#cache)
 - Setup and usage of [Workbox](#workbox)
 - [Axios](#axios)
 - Note on [indexedDB](#indexedDB)
@@ -144,8 +144,8 @@ If we want to work with `indexedDB`, we can use the `npm` package [idb][1]. To d
 
 `browserify` will bundle _index.js_ inside a new file _bundle.js_ , that will launched by the browser with a script in _index.html_. We then can use the `idb` module with a _require('idb')_ inside _index.js_.
 
-> > yarn add idb browserify</p>
-> > browserify index.js -o bundle.js
+> yarn add idb browserify</p>
+> browserify index.js -o bundle.js
 
 [1]: https://www.npmjs.com/package/idb "idb"
 [2]: http://browserify.org/ "browserify"

@@ -60,18 +60,7 @@
   <!-- CDN fro Axios (node based) -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <script src="bundle.js"></script>
-
-
-  <footer>
-    <p>Note: the file <emp>index.js</emp> contains the code for <emp>indexedDB</emp>;
-    more precisely, we use <emp>idb</emp>, so we need to <emp>browserify</emp> it
-    to bundle inside a new <emp>bundle.js</emp> file. This last one is called by a
-    script in <emp>index.html</emp>.</p>
-    <p> In the <emp>index.js</emp> file, we require <emp>require('idb').</emp></p>
-    <p>> <emp>yarn add idb browserify</emp></p>
-    <p>> browserifiy index.js -o bundle.js</p>
-  </footer>
+  <script src='index.js'></script>
 
 </body>
 
