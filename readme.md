@@ -12,15 +12,15 @@ We also implement caching.
 
 ### Live demo app at:
 
-> https://fetch-cache.surge.sh
+> <https://fetch-cache.surge.sh>
 
 ### Sources:
 
-- https://web.dev/promises/
-- https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker
-- https://golb.hplar.ch/2018/01/A-closer-look-at-the-Cache-API.html
-- https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/reduce
-- https://decembersoft.com/posts/promises-in-serial-with-array-reduce/
+- <https://web.dev/promises/>
+- <https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker>
+- <https://golb.hplar.ch/2018/01/A-closer-look-at-the-Cache-API.html>
+- <https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/reduce>
+- <https://decembersoft.com/posts/promises-in-serial-with-array-reduce/>
 
 ##
 
