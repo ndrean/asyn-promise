@@ -1,4 +1,4 @@
-Demo of different `fetch` constructions client-side with a public API (endpoint: "https://reqres.in/api/users/") (supporting `CORS` and `https`).
+Demo of different `fetch` constructions **client-side** with a public API (endpoint: "https://reqres.in/api/users/" supporting `CORS` and `https`).
 We just render the ids in the browser to view the result of testing some fetch chaining strategies:
 
 - simple loop with 2 construcions (`async/await` and `promise.then()`)
@@ -33,13 +33,13 @@ Two versions of fetch:
 
 The `cache API` is also implemented with `await` and `then()` versions
 
-## Parallel fetching with promise.all([]) for
+## Parallel fetching
 
 Given an array `usersIds = [1,...n]`, we map to an array of promises indexed by `usersIds`. These promises are simply given by `fetch(uri/{id})` and rendered in the browser. We then call `Promise.all([arrayOfPromises])`.
 
 ## Sequential fetching
 
-Suppose we have a fixed number of tasks/promises. If we simply do `promise1.then(promise2).then(promise3)`, we can't capture the return values. Then we can do:
+Suppose we have a fixed number of tasks/promises. If we simply do `promise1.then(promise2).then(promise3)`, we can't capture the return values. Then we can do (`display` is just a browser rendering method):
 
 ```javascript
 Promise.resolve()
@@ -79,7 +79,7 @@ promises
   });
 ```
 
-## Batch fetching with `array.slice()` and `promise.all()
+## Batch fetching
 
 We use the same `Promise.all` but this time we slice the array of 'usersId' into smaller arrays; we then map to a promise on each subarrays to produce subarrays of promises. Finaly, we run `promise.all([])`.
 
