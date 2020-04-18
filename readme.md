@@ -1,14 +1,14 @@
 Demo of different `fetch` constructions **client-side** with a public API (endpoint: "https://reqres.in/api/users/" supporting `CORS` and `https`).
 We just render the ids in the browser to view the result of testing some fetch chaining strategies:
 
-- [simple loop](#versions) simple loop with 2 construcions (`async/await` and `promise.then()`)
+- [simple loop](#versions-of-fetch-and-cache-API) simple loop with 2 construcions (`async/await` and `promise.then()`)
 - [parallel](#parallel-fetching) Parallel fetching by using `promise.all()` on an array of promises
-- sequential fetching by using `reduce()` on an array of promises
-- batch fetching with `array.slice()` and then `promise.all()` to fetch by batch
+- [sequential](#sequential-fetching) sequential fetching by using `reduce()` on an array of promises
+- [batch](#batch-fetching) batch fetching with `array.slice()` and then `promise.all()` to fetch by batch -[back-fetch](#background-fetch) TODO [background fetch][1]
 
 We also implement caching.
 
-> TODO: background fetch (https://developers.google.com/web/updates/2018/12/background-fetch#how_it_works)
+[1]: <https://developers.google.com/web/updates/2018/12/background-fetch#how_it_works>"background fetch"
 
 ### Live demo app at:
 
@@ -24,7 +24,7 @@ We also implement caching.
 
 ##
 
-## Versions of fetch promises and cache API
+## Versions of fetch and cache API
 
 Two versions of fetch:
 
