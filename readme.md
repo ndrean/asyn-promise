@@ -229,14 +229,23 @@ import axios from "axios";
 in the Javascript files where needed.
 
 We need a file `index.html` and create a directory `/src` and put all our files inside.
-The main js file will be named `/src/index.js`. The link to this file should be declared in the _index.html_ <del>file</del> **<s>without</s>** <s>type="module"</s>
+The main js file will be named `/src/index.js`. The link to this file should be declared in the _index.html_ file **withouttype="module"** (which is needed otherwise).
 
 > <script <s>type="module"</s> src="src/index.js"></script>`
 
-`<script <s>type="module"</s> src="src/index.js"></script>`
+Then add the followings scripts to the `package.json` file (created with `yarn init`):
 
-and then add the followings scripts to the `package.json` file (create with `yarn init`):
-`{ "main": "src/index.js", "scripts": { "serve": "parcel index.html", "build": "parcel build index.html", "test": "echo \"Error: no test specified\" && exit 1" }, }`
+```javascript
+#package.json
+{ ...
+  "main": "src/index.js",
+ "scripts": {
+    "serve": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  ...
+}
+```
 
 To serve the file with a web server, we run:
 
