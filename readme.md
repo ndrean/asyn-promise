@@ -5,7 +5,10 @@ We just render the ids in the browser to view the result of testing some fetch c
 - [parallel](#parallel-fetching) fetching by using `promise.all()` on an array of promises
 - [sequential](#sequential-fetching) fetching by using `reduce()` on an array of promises
 - [batch](#batch-fetching) fetching with `array.slice()` and then `promise.all()` to fetch by batch
-- [indexedDB](#indexedDB) TODO
+- [Cache](#cache) Short explanation of the implementation of storing fetch GET request into the cache
+  = [Workbox](#workbox) Setup and usage of `workbox`
+- [Axios](#axios)
+- [indexedDB](#indexedDB) Note
 
 The data is saved in `cache`.
 
@@ -94,12 +97,6 @@ We use the same `Promise.all` but this time we slice the array of 'usersId' into
 
 ---
 
-## AXIOS
-
-Implementation of alternative library `Axios`: looping, page fetching and post.
-
----
-
 ## cache
 
 We can use the cache to store `http GET` (only GET). To do so, we just declare a _cache_
@@ -126,6 +123,14 @@ const matchedCachedObj = await responseFromCache.json();
 // and review in the console:
 console.log("cacheName", matchedCachedObj.data.email);
 ```
+
+---
+
+## AXIOS
+
+Implementation of alternative library `Axios`: looping, page fetching and post.
+
+---
 
 ## Workbox
 
