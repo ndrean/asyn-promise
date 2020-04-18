@@ -1,8 +1,8 @@
 Demo of different `fetch` constructions **client-side** with a public API (endpoint: "https://reqres.in/api/users/" supporting `CORS` and `https`).
 We just render the ids in the browser to view the result of testing some fetch chaining strategies:
 
-- simple loop with 2 construcions (`async/await` and `promise.then()`)
-- parallel fetching by using `promise.all()` on an array of promises
+- [simple loop](#versions) simple loop with 2 construcions (`async/await` and `promise.then()`)
+- [parallel](#parallel-fetching) Parallel fetching by using `promise.all()` on an array of promises
 - sequential fetching by using `reduce()` on an array of promises
 - batch fetching with `array.slice()` and then `promise.all()` to fetch by batch
 
