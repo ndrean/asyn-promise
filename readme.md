@@ -9,7 +9,7 @@ We just render the ids in the browser to view the result of testing some fetch c
 
 We also implement caching.
 
-[1]: <https://developers.google.com/web/updates/2018/12/background-fetch#how_it_works>"background fetch"
+[1]: https://developers.google.com/web/updates/2018/12/background-fetch#how_it_works "background fetch"
 
 ### Live demo app at:
 
