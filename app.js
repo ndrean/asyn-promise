@@ -69,6 +69,7 @@ const fetchBatch = async (users, name) => {
     await Promise.all(slicedRequests); // returns a batch of promises
   }
 };
+
 fetchBatch(arrayOfUsersId, "batch").catch((error) => console.log(error));
 
 // https://www.freecodecamp.org/news/promise-all-in-javascript-with-example-6c8c5aea3e32/

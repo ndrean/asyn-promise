@@ -30,7 +30,7 @@ Two versions of fetch:
 
 The `cache API` is also implemented with `await` and `then()` versions
 
-## Promise.All for parallel fetching
+## Parallel fetching with promise.all([]) for
 
 Given an array `usersIds = [1,...n]`, we map to an array of promises indexed by `usersIds`. These promises are simply given by `fetch(uri/{id})` and rendered in the browser. We then call `Promise.all([arrayOfPromises])`.
 
@@ -76,10 +76,12 @@ promises
   });
 ```
 
-## Batch fetching.
+## Batch fetching with `array.slice()` and `promise.all()
 
-We use the same `Promise.all` but this time we slice the array of 'usersId' into smaller arrays and loop through these subarrays. Here, we indexedFrom the the `newArray = array.slice(startIndex, endIndex)` and execute `Promise.all(newArray)`.
+We use the same `Promise.all` but this time we slice the array of 'usersId' into smaller arrays; we then map to a promise on each subarrays to produce subarrays of promises. Finaly, we run `promise.all([])`.
 
 > source: https://www.freecodecamp.org/news/promise-all-in-javascript-with-example-6c8c5aea3e32/
 
 ## AXIOS
+
+Implementation of alternative library `Axios`: looping, page fetching and post.
