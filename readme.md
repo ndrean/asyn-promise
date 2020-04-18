@@ -102,11 +102,14 @@ Implementation of alternative library `Axios`: looping, page fetching and post.
 
 ## IndexedDB
 
-The file _index.js_ contains the code for _indexedDB_; more precisely, here we use `idb`, so we need the `npm` package `browserify` it to bundle inside a new _bundle.js_ file. This last one is called by a script in _index.html_.
+The file _index.js_ contains the code for _indexedDB_; more precisely, here we use the `npm` package `idb` [idb][1], so we need the `npm` package `browserify` [browserify][2] it to bundle inside a new _bundle.js_ file. This last one is called by a script in _index.html_.
 In the _index.js_ file, we require _require('idb')_
 
 > > yarn add idb browserify</p>
 > > browserifiy index.js -o bundle.js
+
+[1]: https://www.npmjs.com/package/idb "idb"
+[2]: http://browserify.org/ "browserify"
 
 ## Error handling
 
