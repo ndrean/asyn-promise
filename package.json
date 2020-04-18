@@ -1,13 +1,13 @@
 {
   "dependencies": {
     "axios": "^0.19.2",
-    "axios-cache-adapter": "^2.5.0",
-    "node-fetch": "^2.6.0"
+    "idb": "^5.0.2"
   },
-  "name": "asyn-promise",
+  "name": "fetch-browser",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "author": "Neven DREAN <nevendrean@yahoo.fr>",
   "license": "MIT",
-  "repository": "git@github.com:ndrean/asyn-promise.git"
+  "repository": "git@github.com:ndrean/asyn-promise.git",
+  "description": "fetch loop, parallel, batch, sequential and background in browser and saving in cache and indexedDB"
 }

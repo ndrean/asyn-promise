@@ -68,14 +68,10 @@ const getByPromise = async (uri, nb, cacheName) => {
           .match(request)
           .then(checkStatus)
           .then((r) => r.json())
-        // .then((json) => console.log("from cache :", json.data.email))
+          .then((json) => console.log("from cache :", json.data.first_name))
       )
       .catch((err) => console.log("BAD PROMISE :", err.message))
   );
-};
-
-const postByAxios = async (uri, name, job) => {
-  return await axios.post(uri, { name, job }); // {name: name, job: job} identique
 };
 
 const getAllPageAxios = async (uri, page) => {
@@ -93,11 +89,4 @@ const getAllPageAxios = async (uri, page) => {
   });
 };
 
-export {
-  display,
-  getByAsync,
-  getByPromise,
-  postByAxios,
-  getAllPageAxios,
-  uriu,
-};
+export { display, getByAsync, getByPromise, getAllPageAxios, uriu };

@@ -7,7 +7,7 @@ We just render the ids in the browser to view the result of testing some fetch c
 - [batch](#batch-fetching) fetching with `array.slice()` and then `promise.all()` to fetch by batch
 - [background-fetch](#background-fetch) TODO [background fetch][1]
 
-We also implement caching.
+The data is saved in `cache`. TODO: `indexedDB
 
 [1]: https://developers.google.com/web/updates/2018/12/background-fetch#how_it_works "background fetch"
 
@@ -63,8 +63,8 @@ https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Ar
 
 If we have dynamic promises, we put all the promises in an array and use `reduce()` to collapse the array of promises into a single promise chain.
 The `reduce()` method executes a provided callback function `callback` which takes the `previousValue` and `currentValue` which iterates over the array. The function stores the result in the `accumulator` which will be the `previousValue`. It uses and initial value. Here, we take `Promise.resolve([])`, a promise that always resolves to an empty array as the initial value. Then `accumulator === initialValue` on the first time through the callback.
-We will capture the result in an array, called `arrayOfResults` further used to display the
-results in the browser.
+We will capture the result and push it to the array, further used as `arrayOfResults`. It is
+then used to display results in the browser with our `display`method.
 
 ```javascript
 promises
@@ -101,3 +101,7 @@ Implementation of alternative library `Axios`: looping, page fetching and post.
 ---
 
 ## Background fetch
+
+## Error handling
+
+<https://stackoverflow.com/questions/45285129/any-difference-between-await-promise-all-and-multiple-await/54291660#54291660>
