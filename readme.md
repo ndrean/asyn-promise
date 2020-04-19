@@ -211,11 +211,13 @@ The corresponding npm scripts are:
 }
 ```
 
-> Since we use `async/await`, we can limit the accepted of browsers to those who accept ES5, through the file `package.json` (usefull if we use the bundler `Parcel`)
+> Note for `Parcel.js`. > Firstly, we need a file `index.html` and create a directory `/src` and put all our files inside. The main js file will be named `/src/index.js`. The link to this file should be declared in the _index.html_ file **withouttype="module"** (which is needed otherwise). Then since we use `async/await`, we can limit the accepted of browsers to those who accept ES5, through the file `package.json` (usefull if we use the bundler `Parcel`)
+
+> <script <s>type="module"</s> src="src/index.js"></script>`
 
 ```javascript
 #package.json
-
+// mainly for Parcel
 browserslist": [
     "since 2017-06"
   ]
@@ -268,61 +270,11 @@ We finaly add `.cache node_modules dist` in the `.gitignore` file and our files 
 |-yarn.lock
 |-/scr
   |-index.html
-  |-index.html
   |-index.js
   |-...
 |-/dist
 
 ```
-
-### `Parcel` bundler
-
-We can also use `parcel`.
-
-Then we add the needed packages:
-
-```bash
-yarn add parcel-bundler --dev
-yarn add axios
-```
-
-````
-
-We need a file `index.html` and create a directory `/src` and put all our files inside.
-The main js file will be named `/src/index.js`. The link to this file should be declared in the _index.html_ file **withouttype="module"** (which is needed otherwise).
-
-> <script <s>type="module"</s> src="src/index.js"></script>`
-
-Then add the followings scripts to the `package.json` file (created with `yarn init`):
-
-```javascript
-#package.json
-{ ...
-  "main": "src/index.js",
- "scripts": {
-    "serve": "parcel index.html",
-    "build": "parcel build index.html"
-  },
-  ...
-}
-````
-
-To bundle the project with webpack,
-To bundle in dev mode and serve the app, we run:
-
-```bash
-  yarn serve (-p 1234)
-```
-
-By default, the output directory will be `dist`.
-
-and when ready to build it (optimisation for production), we run:
-
-```bash
-  yarn build
-```
-
-and then go to `http://localhost:1234/`.
 
 ## Error handling
 
