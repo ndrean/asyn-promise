@@ -11,6 +11,7 @@ import {
 // import axios from "axios";
 // const axios = require("axios").default;
 
+import axios from "axios";
 let l = 12; // max number of users in this API
 
 // create an array [1,2,3,...,l]
@@ -123,10 +124,10 @@ for (let i = 1; i <= l; i++) {
 
 getAllPageAxios(uriu, 1).catch((err) => console.log("Page AXIOS", err));
 
-// axios
-//   .post(uriu, { name: "jo", job: "dev" })
-//   .then((r) => {
-//     display("#resu6", r.data.id, "Post Axios");
-//     console.log("post", r.data);
-//   })
-//   .catch((err) => console.log("POST", err));
+axios
+  .post(uriu, { name: "jo", job: "dev" })
+  .then((r) => {
+    display("#resu6", r.data.id, "Post Axios");
+    console.log("post", r.data);
+  })
+  .catch((err) => console.log("POST", err));

@@ -13,7 +13,7 @@ const config = (mode) => {
     devtool: "inline-source-map",
     plugins: [
       new HtmlWebpackPlugin({
-        template: "index.html",
+        template: "src/index.html",
         filename: "index.html",
       }),
     ],

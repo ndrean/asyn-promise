@@ -211,7 +211,7 @@ The corresponding npm scripts are:
 }
 ```
 
-> Since we use `async/await`, we limited the accepted of browsers to those who accept ES5, through the file `package.json`:
+> Since we use `async/await`, we can limit the accepted of browsers to those who accept ES5, through the file `package.json` (usefull if we use the bundler `Parcel`)
 
 ```javascript
 #package.json
@@ -239,7 +239,7 @@ const config = (mode) {
   devtool: "inline-source-map", // helper ot locate errors
   plugins: [
     new HtmlWebpackPlugin({
-      template: "index.html",
+      template: "src/index.html",
       filename: "index.html",
     }),
   ],
@@ -253,7 +253,8 @@ module.exports = config();
 ```
 
 To compile the project, we run `yarn dev` or `yarn build` once it's finished.
-Once the compilation is made, we will serve the files with `webpack-dev-server` so that the `--watch` mode is automatically on, meaning that it will recompile whenever files change.
+
+Once the compilation is made, with this config, we will serve the files with `webpack-dev-server` so that the `--watch` mode is automatically on, meaning that it will recompile automatically whenever files change (HTML or CSS or Javascript) so that we don't have to reload the page or stop/start the web server.
 
 We finaly add `.cache node_modules dist` in the `.gitignore` file and our files system looks like:
 
@@ -262,12 +263,14 @@ We finaly add `.cache node_modules dist` in the `.gitignore` file and our files 
 |-node_modules
 |-.gitignore
 |-readme.md
-|-index.html
+
 |-package.json
 |-yarn.lock
 |-/scr
   |-index.html
+  |-index.html
   |-index.js
+  |-...
 |-/dist
 
 ```
