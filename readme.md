@@ -134,9 +134,13 @@ Implementation of alternative library `Axios`: looping, page fetching and post.
 
 ## Workbox
 
-We wi
+We will X
 
 ## Note on IndexedDB
+
+---
+
+## Bundlers
 
 ### browserify
 
@@ -153,6 +157,8 @@ If we want to work with `indexedDB`, we can use the `npm` package [idb][1]. To d
 [2]: http://browserify.org/ "browserify"
 
 ### Webpack
+
+We first install `webpack` with:
 
 ```bash
 yarn add webpack webpack-cli -D
