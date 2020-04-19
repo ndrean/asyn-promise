@@ -254,8 +254,7 @@ module.exports = config();
 
 ```
 
-Since we will compile the project to the `main.js` file in the '/dist' directory, we make the script in the 'index.html' point to the output filename used in 'webpack.config.js' (output: [...,filename: main.js'])
-
+> Since we will compile the project to the `main.js` file in the '/dist' directory, we make the script in the 'index.html' point to the output filename used in 'webpack.config.js' (output: [...,filename: main.js'])
 > `index.html` <script type="module" src="main.js"> </script>
 
 To compile the project, we run `yarn dev` or `yarn build` once it's finished.
