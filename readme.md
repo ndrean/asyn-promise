@@ -254,6 +254,13 @@ module.exports = config();
 
 ```
 
+Since we will compile the project to the `main.js` file in the '/dist' directory, even if
+our 'src/index.html' points to 'src/index.js', we will change the pointer in the 'src/index/html' file:
+
+> <span style="color:red"> + <script type="module" src="main.js"></script> </span>
+
+> <span style="color:green">- <script type="module" src="index.js"></script></span>
+
 To compile the project, we run `yarn dev` or `yarn build` once it's finished.
 
 Once the compilation is made, with this config, we will serve the files with `webpack-dev-server` so that the `--watch` mode is automatically on, meaning that it will recompile automatically whenever files change (HTML or CSS or Javascript) so that we don't have to reload the page or stop/start the web server.
