@@ -158,18 +158,33 @@ If we want to work with `indexedDB`, we can use the `npm` package [idb][1]. To d
 
 ### Webpack
 
-We first install `webpack` with:
+We first install locally `webpack` with:
 
 ```bash
 yarn add webpack webpack-cli -D
 ```
 
-With the CLI, we can run commands like `npx webpack --config webpack.config.js` which
-will use the default configuration file of webpack.
+Since we used `Axios`, instead of using the following cdn script in the `index.html`file:
 
-> the `webpack.config.js` file is picked by default if present, so we could have not mentionned the name
+`<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>`
 
-We can add helpers for `webpack-cli` by adding add `npm scripts` to the `package.json` file. First we build tha `package.json` file with:
+we import the package and add the following in the Javascript files where needed:
+
+```bash
+yarn add axios
+```
+
+and add the import where needed in our .js files:
+
+```javascript
+import axios from "axios";
+```
+
+With the CLI, we can run commands like `yarn webpack --mode development --config webpack.config.js` to compile in development mode. Webpack will use the default configuration file `webpack.config.js` of webpack if present.
+
+> the `webpack.config.js` file is picked by default if present, so we can not mention it
+
+Instead of running long commands for `webpack-cli` in the terminal, we can add helpers by adding `npm scripts` to the `package.json` file. First we build the `package.json` file with:
 
 ```bash
 yarn init
@@ -177,10 +192,10 @@ yarn init
 
 so that we can run in a terminal:
 
-- yarn clean (empty the directory '/dist')
-- yarn dev (bundling in development mode)
-- yarn build (bundling in production mode when ready to minimize)
-- yarn serve (to run the development server)
+- yarn clean (this empties the directory '/dist')
+- yarn dev (bundles in development mode)
+- yarn build (bundles in production mode when ready to minimize)
+- yarn serve (runs a development server)
 
 The corresponding npm scripts are:
 
@@ -196,7 +211,17 @@ The corresponding npm scripts are:
 }
 ```
 
-Webpack's configuration file which is presented here as a function so that running webpack --mode production will assign `config(production)`
+> Since we use `async/await`, we limited the accepted of browsers to those who accept ES5, through the file `package.json`:
+
+```javascript
+#package.json
+
+browserslist": [
+    "since 2017-06"
+  ]
+```
+
+Webpack's configuration file which is presented here as a function so that running `webpack --mode production` will assign `config(production)`
 
 ```javascript
 # webpack.config.js
@@ -227,23 +252,29 @@ module.exports = config();
 
 ```
 
-Once the compilation is made, we will serve the files with `webpack-dev-server` so that the `--watch` mode is automatically.
-on, meaning that it will recompile whenever files change.
-ok: npx webpack --mode development --config webpack.config.js
-nok: npm run devpack
+To compile the project, we run `yarn dev` or `yarn build` once it's finished.
+Once the compilation is made, we will serve the files with `webpack-dev-server` so that the `--watch` mode is automatically on, meaning that it will recompile whenever files change.
+
+We finaly add `.cache node_modules dist` in the `.gitignore` file and our files system looks like:
+
+```bash
+|-.cache
+|-node_modules
+|-.gitignore
+|-readme.md
+|-index.html
+|-package.json
+|-yarn.lock
+|-/scr
+  |-index.html
+  |-index.js
+|-/dist
+
+```
 
 ### `Parcel` bundler
 
-We can also use `parcel`. Since we are using `async/await`, we limited the accepted list
-of browsers to those who accept ES16, through the file `package.json`:
-
-```javascript
-#package.json
-
-browserslist": [
-    "since 2017-06"
-  ]
-```
+We can also use `parcel`.
 
 Then we add the needed packages:
 
@@ -252,15 +283,7 @@ yarn add parcel-bundler --dev
 yarn add axios
 ```
 
-For using `Axios`, instead of using the cdn
-
-`<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>`
-
-we import the package and add the following in the Javascript files where needed:
-
-```javascript
-import axios from "axios";
-```
+````
 
 We need a file `index.html` and create a directory `/src` and put all our files inside.
 The main js file will be named `/src/index.js`. The link to this file should be declared in the _index.html_ file **withouttype="module"** (which is needed otherwise).
@@ -279,8 +302,9 @@ Then add the followings scripts to the `package.json` file (created with `yarn i
   },
   ...
 }
-```
+````
 
+To bundle the project with webpack,
 To bundle in dev mode and serve the app, we run:
 
 ```bash
@@ -296,23 +320,6 @@ and when ready to build it (optimisation for production), we run:
 ```
 
 and then go to `http://localhost:1234/`.
-
-We finaly add `.cache node_modules dist` in the `.gitignore` file and our files system looks like:
-
-```bash
-|-.cache
-|-node_modules
-|-.gitignore
-|-readme.md
-|-index.html
-|-package.json
-|-yarn.lock
-|-/scr
-  |-index.html
-  |-index.js
-|-/dist
-
-```
 
 ## Error handling
 

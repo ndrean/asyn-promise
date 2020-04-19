@@ -7,8 +7,8 @@
   "author": "NDREAN <nevendrean@yahoo.fr>",
   "license": "ISC",
   "scripts": {
-    "devparc": "parcel index.html",
-    "buildparc": "parcel build index.html",
+    "devp": "parcel index.html",
+    "buildp": "parcel build index.html",
     "clean": "rm dist/*",
     "devpack": "  webpack --mode development --hot --config webpack.config.js",
     "buildpack": "webpack -p --mode production",
