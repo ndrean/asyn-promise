@@ -257,9 +257,9 @@ module.exports = config();
 Since we will compile the project to the `main.js` file in the '/dist' directory, even if
 our 'src/index.html' points to 'src/index.js', we will change the pointer in the 'src/index/html' file:
 
-<span style="color: red">_-_' script type="module" src=_"index.js"_> /script </span>
+- <script type="module" src="<s>index.js</s>"> </script>
 
-<span style="color:green">_+_ <script type="module" src="*main.js*"></script></span>
+* <script type="module" src="main.js"> </script>
 
 To compile the project, we run `yarn dev` or `yarn build` once it's finished.
 
