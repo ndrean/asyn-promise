@@ -2,12 +2,13 @@ import {
   getByAsync,
   getByPromise,
   getAllPageAxios,
+  getAxios,
   uriu,
   display,
 } from "./functions.js";
 
 // parcel bundler
-import axios from "axios";
+// import axios from "axios";
 // const axios = require("axios").default;
 
 let l = 12; // max number of users in this API
@@ -84,7 +85,9 @@ const promises = arrayOfSortedPromises();
 promises
   .reduce((promiseChain, currentPromise) => {
     return promiseChain.then((result) => {
-      return currentPromise.then((currentResult) => [...result, currentResult]);
+      return currentPromise.then((currentResult) => {
+        return [...result, currentResult];
+      });
     });
     // initial value is a promise that always resolves, and we pass an empty array as a result
   }, Promise.resolve([]))
@@ -115,21 +118,15 @@ promises
 
 /************* AXIOS ******************/
 for (let i = 1; i <= l; i++) {
-  try {
-    axios
-      .get(uriu + i)
-      .then((r) => display("#resu4", r.data.data.id, "Axios "));
-  } catch (err) {
-    console.log("AXIOS", err);
-  }
+  getAxios(uriu, i).catch((err) => console.log(err));
 }
 
 getAllPageAxios(uriu, 1).catch((err) => console.log("Page AXIOS", err));
 
-axios
-  .post(uriu, { name: "jo", job: "dev" })
-  .then((r) => {
-    display("#resu6", r.data.id, "Post Axios");
-    console.log("post", r.data);
-  })
-  .catch((err) => console.log("POST", err));
+// axios
+//   .post(uriu, { name: "jo", job: "dev" })
+//   .then((r) => {
+//     display("#resu6", r.data.id, "Post Axios");
+//     console.log("post", r.data);
+//   })
+//   .catch((err) => console.log("POST", err));

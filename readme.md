@@ -155,51 +155,81 @@ If we want to work with `indexedDB`, we can use the `npm` package [idb][1]. To d
 ### Webpack
 
 ```bash
-yarn add webpack webpack-cli -D @webpack-cli/serve
+yarn add webpack webpack-cli -D
 ```
 
-then
+With the CLI, we can run commands like `npx webpack --config webpack.config.js` which
+will use the default configuration file of webpack.
+
+> the `webpack.config.js` file is picked by default if present, so we could have not mentionned the name
+
+We can add helpers for `webpack-cli` by adding add `npm scripts` to the `package.json` file. First we build tha `package.json` file with:
 
 ```bash
 yarn init
 ```
 
-then we build two config files:
+so that we can run in a terminal:
+
+- yarn clean (empty the directory '/dist')
+- yarn dev (bundling in development mode)
+- yarn build (bundling in production mode when ready to minimize)
+- yarn serve (to run the development server)
+
+The corresponding npm scripts are:
 
 ```javascript
 # package.json
 {
-
+  "scripts":{
+    "clean": "rm dist/*",
+    "dev": "  webpack --mode development --hot --config webpack.config.js",
+    "build": "webpack -p --mode production",
+    "serve": "webpack-dev-server"
+  }
 }
+```
 
+Webpack's configuration file which is presented here as a function so that running webpack --mode production will assign `config(production)`
+
+```javascript
 # webpack.config.js
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const config = {
-  mode: 'development',
+const config = (mode) {
+  mode,
   entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"), // our distribution directory will be: `/dist
+    filename: "main.js", // the name of the final JS file
   },
-  devtool: "inline-source-map",
+  devtool: "inline-source-map", // helper ot locate errors
   plugins: [
     new HtmlWebpackPlugin({
+      template: "index.html",
       filename: "index.html",
     }),
   ],
+  module: { // to compile the CSS files
+      rules: [{ test: /\.css$/, use: "css-loader" }],
+    },
 };
 
-module.exports = config;
+module.exports = config();
 
 ```
 
-### parcel
+Once the compilation is made, we will serve the files with `webpack-dev-server` so that the `--watch` mode is automatically.
+on, meaning that it will recompile whenever files change.
+ok: npx webpack --mode development --config webpack.config.js
+nok: npm run devpack
+
+### `Parcel` bundler
 
 We can also use `parcel`. Since we are using `async/await`, we limited the accepted list
-of browsers to:
+of browsers to those who accept ES16, through the file `package.json`:
 
 ```javascript
 #package.json
@@ -209,7 +239,7 @@ browserslist": [
   ]
 ```
 
-Then
+Then we add the needed packages:
 
 ```bash
 yarn add parcel-bundler --dev
@@ -220,13 +250,11 @@ For using `Axios`, instead of using the cdn
 
 `<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>`
 
-we import the package and add:
+we import the package and add the following in the Javascript files where needed:
 
 ```javascript
 import axios from "axios";
 ```
-
-in the Javascript files where needed.
 
 We need a file `index.html` and create a directory `/src` and put all our files inside.
 The main js file will be named `/src/index.js`. The link to this file should be declared in the _index.html_ file **withouttype="module"** (which is needed otherwise).
@@ -247,19 +275,38 @@ Then add the followings scripts to the `package.json` file (created with `yarn i
 }
 ```
 
-To serve the file with a web server, we run:
+To bundle in dev mode and serve the app, we run:
 
 ```bash
-  npm run serve (-p 1234)
+  yarn serve (-p 1234)
 ```
+
+By default, the output directory will be `dist`.
 
 and when ready to build it (optimisation for production), we run:
 
 ```bash
-  npm run build
+  yarn build
 ```
 
 and then go to `http://localhost:1234/`.
+
+We finaly add `.cache node_modules dist` in the `.gitignore` file and our files system looks like:
+
+```bash
+|-.cache
+|-node_modules
+|-.gitignore
+|-readme.md
+|-index.html
+|-package.json
+|-yarn.lock
+|-/scr
+  |-index.html
+  |-index.js
+|-/dist
+
+```
 
 ## Error handling
 

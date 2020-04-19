@@ -68,11 +68,20 @@ const getByPromise = async (uri, nb, cacheName) => {
       .then(
         caches
           .match(request)
-          .then((r) => r.json())
+          .then((result) => result.json())
           .then((rjson) => console.log("from cache :", rjson.data.first_name))
       )
       .catch((err) => console.log("BAD PROMISE :", err.message))
   );
+};
+
+const getAxios = async (uri, i) => {
+  try {
+    const response = await axios.get(uriu + i);
+    return display("#resu4", response.data.data.id, "Axios ");
+  } catch (error) {
+    console.log("Axios ", error);
+  }
 };
 
 const getAllPageAxios = async (uri, page) => {
@@ -90,4 +99,4 @@ const getAllPageAxios = async (uri, page) => {
   });
 };
 
-export { display, getByAsync, getByPromise, uriu, getAllPageAxios };
+export { display, getByAsync, getByPromise, uriu, getAxios, getAllPageAxios };

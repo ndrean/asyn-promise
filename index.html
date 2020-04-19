@@ -5,20 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
-  <style>
-    .title {
-      color: blue;
-      font-weight: bold;
-    }
-
-    .main {
-      font-size: 15px;
-    }
-  </style>
+  <link rel="stylesheet" href="./src/styles.css">
 </head>
 
 <body>
-  <h1>Different <strong>http GET</strong> requests from the browser</h1>
+  <h1>Different <strong>http GET</strong> requests (loop, parallel, sequential) with FETCH and AXIOS from the browser
+  </h1>
   <hr>
   <h3 class="title">Simple loop on http requests with <strong>promise.then()</strong>
     and <strong>async-await</strong></h3>
@@ -55,8 +47,9 @@
   <hr>
   <p id="resu7" class="main"></p>
 
-  <!-- type="module" since we import 'axios' in the script 'app.js' -->
-  <script src="./src/index.js"></script>
+  <!-- type="module" since we import 'axios' in the script 'functions.js' -->
+  <script type="module" src="bundle.js"></script>
+
   <!-- CDN fro Axios (node based) -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
 
