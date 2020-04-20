@@ -6,7 +6,7 @@ import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 
-let l = 20; // max number of users in this API
+let l = 15; // max number of users in this API
 
 // create an array [1,2,3,...,l]
 const arrayOfUsersId = [...Array(l)].map((_, i) => i + 1);

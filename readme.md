@@ -1,6 +1,6 @@
-Demo of different `fetch` constructions **client-side** with a public API (endpoint: "https://reqres.in/api/users/" supporting `CORS` and `https` or "https://jsonplaceholder.typicode.com/users/").
+## Introduction
 
-We just render the ids in the browser to view the result of testing some fetch chaining strategies:
+Demo of different `fetch` constructions **client-side**. We just render the ids in the browser to view the result of testing some fetch chaining strategies. We used a public API (endpoint: "https://reqres.in/api/users/" supporting `CORS` and `https` or "https://jsonplaceholder.typicode.com/users/"). The data is saved in _cache_. A link to a live demo using [surge](https://surge.sh/).
 
 - [Simple loop](#versions-of-fetch-and-cache-API) with the construction: `async/await`
 
@@ -16,13 +16,17 @@ We just render the ids in the browser to view the result of testing some fetch c
 
 - [Axios](#axios)
 
-- [Bundling Webpack](#bundling)
+- [Workbox](#workbox)
 
-The data is saved in _cache_.
+- [Browserify](#Bundling-browserify)
+
+- [Webpack](#bundling-webpack)
+
+- [Error](#error-handling)
 
 ### Live demo app at:
 
-> <https://fetch-cache.surge.sh>
+> <https://fetch-cache-post.surge.sh/>
 
 ### Sources:
 
@@ -36,10 +40,10 @@ The data is saved in _cache_.
 
 - <https://decembersoft.com/posts/promises-in-serial-with-array-reduce/>
 
-## `fetch` and _cache_ API
+## _fetch_ and _cache_ API
 
 - `async await` with `try/catch`.
-- The _cache API_ is also implemented with `await`.
+- The _cache_ API is also implemented with `await`.
 
 ## Parallel fetching
 
@@ -98,7 +102,7 @@ We use the same `Promise.all` but this time we slice the array of 'usersId' into
 ## cache
 
 We can use the cache to store `http GET` (only GET). To do so, we just declare a _cache_
-by giving it a name and add a stringified key/value `{request: reponse}` (just _request_ in case of an http fetch).
+by giving it a name and add a stringified key/value `{request: reponse}` (we just need to declare _request_ in case of an _http fetch_).
 
 ```javascript
 const request = new Request(url);
