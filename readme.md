@@ -142,9 +142,7 @@ Implementation of alternative library `Axios`: looping, page fetching and post.
 
 TODO
 
-## Bundling
-
-### browserify
+## Bundling - `browserify`
 
 If we want to work with `indexedDB`, we can use the `npm` package [idb][1]. To do so, we have a working file _index.js_ that contains the code using `idb`. To use it, we need to require the module `idb`, so we need to bundle it. We can use a quick tool such as the `npm` package [browserify][2]:
 
@@ -159,7 +157,7 @@ If we want to work with `indexedDB`, we can use the `npm` package [idb][1]. To d
 [1]: https://www.npmjs.com/package/idb "idb"
 [2]: http://browserify.org/ "browserify"
 
-### Webpack
+## Bundling Webpack
 
 ### Install `npm` packages
 
@@ -171,8 +169,6 @@ yarn add webpack webpack-cli webpack-dev-server copy-webpack-plugin html-webpack
 
 Since we used `Axios`, instead of adding the following cdn script in the _index.html_ file:
 
-> index.html (body)
-
 script ~~src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"~~ /script
 
 we import the package with `yarn add axios` and add the import where needed in our _.js_ files:
@@ -181,7 +177,7 @@ we import the package with `yarn add axios` and add the import where needed in o
 + import axios from "axios";
 ```
 
-#### Directory setup
+### Directories setup
 
 Our files system should look like
 
@@ -193,13 +189,14 @@ Our files system should look like
 |-package.json
 |-yarn.lock
 |-/scr
+--|-/img
 --|-index.html
 --|-index.js
 --|-...
 |-/dist
 ```
 
-#### Gitignore
+### Gitignore
 
 We add `.cache node_modules dist` in the _.gitignore_ file.
 
@@ -248,7 +245,7 @@ const  config  = (mode) {
 module.exports  =  config();
 ```
 
-#### Note on CSS
+### Note on CSS
 
 We added the packages `css-loader` and `style-loader` packages firstly (declared in `package.json`).
 
@@ -265,7 +262,7 @@ We also have to add `import "./styles.css"` within _index.js_
 
 and remove the link in the header of the _index.html_ file: ~~script link rel="stylesheet" type="text/css" href="./styles.css" script~~
 
-#### npm scripts in `package.json`
+### npm scripts in `package.json`
 
 Webpack is configured within the file `webpack.config.js`. With the CLI, we can run commands like `yarn webpack --mode development --config webpack.config.js` to compile in development mode for example. Webpack will use the default configuration file `webpack.config.js` of webpack if present.
 
@@ -294,11 +291,9 @@ yarn build (bundles in production mode when ready to minimize and output in the 
 yarn serve (runs a development server)
 ```
 
-#### Change Link to .js
+### Change Link to .js
 
 Since we will compile the project to the _main.js_ file in the _/dist_ folder, we make the script in the _index.html_ point to the output filename (`output: [...,filename: "main.js"])`) used in _webpack.config.js_
-
-> # index.html
 
 script type="module" ~~~scr="index.js"~~~ => src="main.js"> /script
 
