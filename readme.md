@@ -163,32 +163,25 @@ If we want to work with `indexedDB`, we can use the `npm` package [idb][1]. To d
 
 ### Install `npm` packages
 
-We initialize `yarn` (the flag -y will skip all the questions)
-
-```bash
-yarn init (-y)
-```
-
-We then install `webpack` with all needed dependencies: `--dev` or `-D`to install locally:
+We initialize `yarn` (the flag -y will skip all the questions) with `yarn init (-y)` and then install `webpack` with all needed dependencies (`--dev` or `-D`to install locally):
 
 ```bash
 yarn add webpack webpack-cli webpack-dev-server copy-webpack-plugin html-webpack-plugin css-loader style-loader -D
 ```
 
-Since we used `Axios`, instead of adding the following cdn script in the `index.html`file:
+Since we used `Axios`, instead of adding the following cdn script in the _index.html_ file:
 
-```html
-#index.html (body)
-<script <s>
-  src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"</s>
-</script>
-```
+> index.html (body)
 
-we import the package with `yarn add axios` and add the import where needed in our .js files:
+> script ~~~ src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ~~~/script
+
+````
+
+we import the package with `yarn add axios` and add the import where needed in our _.js_ files:
 
 ```javascript
 + import axios from "axios";
-```
+````
 
 #### Directory setup
 
@@ -311,12 +304,9 @@ yarn serve (runs a development server)
 
 Since we will compile the project to the _main.js_ file in the _/dist_ folder, we make the script in the _index.html_ point to the output filename (`output: [...,filename: "main.js"])`) used in _webpack.config.js_
 
-```html
-# index.html +
-<script type="module" scr="<s">
-  "index.js"</s> =>  src="main.js">
-</script>
-```
+> # index.html
+
+> script type="module" ~~~scr="index.js"~~~ => src="main.js"> /script
 
 ### Compile and launch `web-pack-dev-server`
 
@@ -326,15 +316,13 @@ Once the compilation is made, with this config, we will serve the files with `we
 
 ### Notes for `Parcel.js`
 
-Firstly, we need a file `index.html` and create a directory `/src` and put all our files inside. The main js file will be named `/src/index.js`. The link to this file should be declared in the _index.html_ file **without type="module"** (which is needed for `webpack`otherwise).
+- Firstly, we need a file `index.html` and create a directory `/src` and put all our files inside. The main js file will be named `/src/index.js`. The link to this file should be declared in the _index.html_ file **without type="module"** (which is needed for `webpack`otherwise).
 
-```html
-<script <s>
-  type="module"</s>  src="src/index.js">
-</script>
-```
+> index.html
 
-Then since we use `async/await`, we can limit the accepted of browsers to those who accept ES5, through the file `package.json` ( if we use the bundler `Parcel`)
+> script ~~~type="module"~~~ src="src/index.js"> /script
+
+- Then since we use `async/await`, we can limit the accepted of browsers to those who accept ES5, through the file `package.json` ( if we use the bundler `Parcel`)
 
 ```javascript
 #package.json
