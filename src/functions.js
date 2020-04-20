@@ -1,4 +1,4 @@
-const uriu = "https://jsonplaceholder.typicode.com/users/";
+const uriu = "https://jsonplaceholder.typicode.com/posts/";
 // const uriu = "https://jsonplaceholder.typicode.com/posts/";
 
 // const axios = require("axios").default;
@@ -6,6 +6,7 @@ import axios from "axios";
 
 // const uriu = "https://reqes.in/api/users/";
 
+//helper
 const display = (htmlID, response, text) => {
   document
     .querySelector(htmlID)
@@ -13,6 +14,14 @@ const display = (htmlID, response, text) => {
       "beforeend",
       `<span>${text}: ${response}  &nbsp , &nbsp</span> `
     );
+};
+
+// helper
+const checkStatus = async (response) => {
+  if (!response.ok) {
+    return await Promise.reject(new Error(response));
+  }
+  return await Promise.resolve(response);
 };
 
 const getByAsync = async (uri, nb, cacheName) => {
@@ -32,7 +41,7 @@ const getByAsync = async (uri, nb, cacheName) => {
     //display in console from cache
     const responseFromCache = await caches.match(request);
     const matchedCachedObj = await responseFromCache.json();
-    // console.log("from cache await ", matchedCachedObj.data.email);
+    console.log("from cache :", matchedCachedObj.name);
 
     const json = await check.json();
     return await json.id; //json.data.id;
@@ -42,14 +51,6 @@ const getByAsync = async (uri, nb, cacheName) => {
 };
 /********************     Promise    **************/
 // add origin header on request
-
-// helper
-const checkStatus = async (response) => {
-  if (!response.ok) {
-    return await Promise.reject(new Error(response));
-  }
-  return await Promise.resolve(response);
-};
 
 const getAxios = async (uri, i) => {
   try {
@@ -61,19 +62,4 @@ const getAxios = async (uri, i) => {
   }
 };
 
-const getAllPageAxios = async (uri, page) => {
-  const pageResponse = await axios.get(uri + "?page=" + page);
-  if (pageResponse === undefined) {
-    return;
-  }
-  const result = pageResponse.data.data;
-  return result.forEach((response) => {
-    display(
-      "#resu5",
-      JSON.stringify(response.id),
-      "(Axios await all page " + page + ")"
-    );
-  });
-};
-
-export { display, getByAsync, uriu, getAxios, getAllPageAxios };
+export { display, getByAsync, uriu, getAxios };

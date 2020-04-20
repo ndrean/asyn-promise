@@ -17,7 +17,7 @@ const displayInput = async (htmlTag, key, value) => {
     .insertAdjacentHTML("beforeend", `<p>${key}: &nbsp ${value} </p>`);
 };
 
-const displayPost = async (tag, form) => {
+const displayPost = (tag, form) => {
   for (const [k, v] of form.entries()) {
     console.log(k, v);
     displayInput(tag, k, v);
@@ -28,9 +28,8 @@ const postFetch = async (uri, formData) => {
   try {
     const response = await fetch(uri, { method: "POST", body: formData });
     const result = await response.json();
-    return await displayInput("#resu6", "New ID :", result.id).then(
-      () => displayPost("#resu6", formData)
-      // .then(formReset(formData))
+    return await displayInput("#resu6", "New ID :", result.id).then(() =>
+      displayPost("#resu6", formData)
     );
   } catch (err) {
     throw err;
@@ -46,10 +45,7 @@ const postAxios = async (uri, formData) => {
       data: formData,
     });
     return await displayInput("#resu9", "New ID", result.data.id).then(() => {
-      for (let [k, v] of formData.entries()) {
-        console.log(k, v);
-        // displayInput("#resu9", k, v);
-      }
+      displayPost("#resu9", formData);
     });
   } catch (err) {
     throw err;

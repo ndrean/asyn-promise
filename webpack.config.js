@@ -15,7 +15,6 @@ const config = (mode) => {
     devServer: {
       contentBase: "./src/", //path.resolve(__dirname, "src"),
       watchContentBase: true,
-      publicPath: "/dist/",
     },
     devtool: "inline-source-map",
     plugins: [

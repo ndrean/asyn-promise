@@ -1,20 +1,15 @@
-import {
-  getByAsync,
-  getAllPageAxios,
-  getAxios,
-  uriu,
-  display,
-} from "./functions.js";
+import { getByAsync, getAxios, uriu, display } from "./functions.js";
 
 import { postFetch, postAxios } from "./form";
+
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 
-let l = 3; // max number of users in this API
+let l = 20; // max number of users in this API
 
 // create an array [1,2,3,...,l]
-const arrayOfUsersId = [...Array(l)].map((_, i) => i + 5);
+const arrayOfUsersId = [...Array(l)].map((_, i) => i + 1);
 
 /********* Parallel fetching **************/
 const fetchAll = async (arrayOfIds, uri, name) => {
@@ -32,7 +27,7 @@ const fetchAll = async (arrayOfIds, uri, name) => {
   }
 };
 
-// fetchAll(arrayOfUsersId, uriu, "All").catch((error) => console.log(error));
+fetchAll(arrayOfUsersId, uriu, "All").catch((error) => console.log(error));
 
 /********* Simple loop ************/
 // Helper
@@ -45,14 +40,14 @@ const f = async (callback, uri, userID, consoleText, cacheName) => {
   }
 };
 
-// for (let i = 1; i <= l; i++) {
-//   f(getByAsync, uriu, i, "Loop", "Loop").catch((err) => console.log(err));
-// }
+for (let i = 1; i <= l; i++) {
+  f(getByAsync, uriu, i, "Loop", "Loop").catch((err) => console.log(err));
+}
 
 /**************  batch of length p with Promise.then syntax ****************/
 
 const fetchBatch = async (users, name) => {
-  const p = 2;
+  const p = 5;
   for (let i = 0; i <= l; i += p) {
     const slicedRequests = users.slice(i, i + p).map(async (userID) => {
       return getByAsync(uriu, userID, name).then((r) =>
@@ -64,7 +59,7 @@ const fetchBatch = async (users, name) => {
   }
 };
 
-// fetchBatch(arrayOfUsersId, "batch").catch((error) => console.log(error));
+fetchBatch(arrayOfUsersId, "batch").catch((error) => console.log(error));
 
 /*******************************************/
 /* Sequential with Reduce */
@@ -120,6 +115,7 @@ promises
 for (let i = 1; i <= l; i++) {
   getAxios(uriu, i).catch((err) => console.log(err));
 }
+
 //page
 // getAllPageAxios(uriu, 1).catch((err) => console.log("Page AXIOS", err));
 
@@ -128,7 +124,9 @@ document.querySelector("form").addEventListener("submit", (e) => {
   e.preventDefault();
   const userForm = document.querySelector("form");
   const myForm = new FormData(userForm);
-  postFetch(uriu, myForm).then(userForm.reset());
-  // .then(
-  // postAxios(uriu, myForm).catch((err) => console.log("POST AXIOS", err));
+
+  postFetch(uriu, myForm)
+    .then(() => postAxios(uriu, myForm))
+    .then(userForm.reset())
+    .catch((err) => console.log("POST AXIOS", err));
 });
