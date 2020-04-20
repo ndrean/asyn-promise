@@ -265,7 +265,7 @@ We have defined how to import CSS files in _webpack.config.js_, namely how to fi
 + import "./styles.css"
 ```
 
-We added _bootstrap_ which needs the packages _jquery_ and _popper.js_ and relies on _css-loader_ since we importated Compiled CSS.
+We added _bootstrap_ which needs the packages _jquery_ and _popper.js_ and relies on _css-loader_ since we imported Compiled CSS.
 
 ```javascript
 #index.js
@@ -273,7 +273,9 @@ import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 ```
 
-- we remove (because of `style-loader`) the link in the header of the _index.html_ file: ~~script link rel="stylesheet" type="text/css" href="./styles.css" script~~
+- we remove (because of `style-loader`) the link in the header of the _index.html_ file:
+
+~~script link rel="stylesheet" type="text/css" href="./styles.css" script~~
 
 ### Hot reload
 
