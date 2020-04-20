@@ -128,7 +128,7 @@ console.log("cacheName", matchedCachedObj.data.email);
 
 ## AXIOS
 
-Implementation of alternative library `Axios`: looping, page fetching and post.
+Implementation of alternative library `Axios`: looping and post.
 
 ## Workbox
 
