@@ -127,6 +127,7 @@ document.querySelector("form").addEventListener("submit", (e) => {
   e.preventDefault();
   const userForm = document.querySelector("form");
   const myForm = new FormData(userForm);
-  postFetch(uriu, myForm).catch((err) => console.log("FETCH AXIOS", err));
-  postAxios(uriu, myForm).catch((err) => console.log("POST AXIOS", err));
+  postFetch(uriu, myForm);
+  // .then(
+  // postAxios(uriu, myForm).catch((err) => console.log("POST AXIOS", err));
 });

@@ -37,14 +37,19 @@ const postFetch = async (uri, formData) => {
 
 const postAxios = async (uri, formData) => {
   try {
-    const response = await axios.post({
+    // promise returns a json
+    const result = await axios({
       url: uri,
       method: "post",
       data: formData,
     });
-    const result = await response.json();
-    return await display("#resu9", result.data.id, "Post Axios")
-      .then(() => display("#resu9", formData))
+    return await displayInput("#resu9", "New ID", result.data.id)
+      .then(() => {
+        for (let [k, v] of formData.entries()) {
+          console.log(k, v);
+          // displayInput("#resu9", k, v);
+        }
+      })
       .then(formReset(formData));
   } catch (err) {
     throw err;
