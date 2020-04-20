@@ -181,10 +181,18 @@ Our files system should look like
 |-package.json
 |-yarn.lock
 |-/dist
+|-|-index.html
+|-|-main.js
 |-/scr
 |-|-/img
+|-|-|-icon-512x512.png
+|-|-|-icon-192x192.png
+|-|-|-...
 |-|-index.html
 |-|-index.js
+|-|-functions.js
+|-|-forms.js
+|-|-styles.css
 |-|-...
 ```
 
@@ -201,7 +209,7 @@ We add `.cache node_modules dist` in the _.gitignore_ file.
 
 ### `webpack.config.js`
 
-We will create two configurations for Webpack, development mode and production mode. The Webpack configuration file is presented here as a function so that we can running `webpack --mode production` will assign `config(production)`
+The Webpack configuration file is presented here as a function so that we can running `webpack --mode production` will assign `config(production)`
 
 ```javascript
 # webpack.config.js
@@ -216,11 +224,15 @@ const  config  = (mode) {
     path: path.resolve(__dirname, "dist"), // our distribution directory will be: `/dist
     filename: "main.js", // the name of the final JS file
   },
-  devtool: "inline-source-map", // helper ot locate errors
+  devServer: {
+      contentBase: "./src/", //absolute path recommendedpath.resolve(__dirname, "src"),
+      watchContentBase: true, // full page reload, for the static html change
+    },
+  devtool: "inline-source-map", // helper to locate errors
   plugins: [
-  // clean folder between runs
+  // clean folder after production building
   new  CleanWebpackPlugin(),
-  //will automatically inject bundle js into ./dist/index.html
+  //will automatically inject bundle js into ./dist/index.html (output folder)
   new  HtmlWebpackPlugin({
     template: "src/index.html",
     filename: "index.html",
@@ -250,6 +262,14 @@ We have defined how to import CSS files in _webpack.config.js_, namely how to fi
 ```javascript
 #index.js
 + import "./styles.css"
+```
+
+We added _bootstrap_ which needs the packages _jquery_ and _popper.js_ and relies on _css-loader_ since we importated Compiled CSS.
+
+```javascript
+#index.js
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 ```
 
 - we remove (because of `style-loader`) the link in the header of the _index.html_ file: ~~script link rel="stylesheet" type="text/css" href="./styles.css" script~~
