@@ -173,7 +173,7 @@ Since we used `Axios`, instead of adding the following cdn script in the _index.
 
 > index.html (body)
 
-> script ~~ src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ~~/script
+script ~~src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"~~ /script
 
 we import the package with `yarn add axios` and add the import where needed in our _.js_ files:
 
@@ -256,14 +256,14 @@ We have defined how to import CSS files in _webpack.config.js_, namely how to fi
 
 > `module: {rules: [{ test: /\.css$/, use: ["style-loader", "css-loader"] }]}`
 
-We also have to add `import "./styles.css"` within _index.js_ and remove the link in the header of the _index.html_ file.
+We also have to add `import "./styles.css"` within _index.js_
 
 ```javascript
 #index.js
 + import "./styles.css"
 ```
 
-~~script link rel="stylesheet" type="text/css" href="./styles.css" script~~
+and remove the link in the header of the _index.html_ file: ~~script link rel="stylesheet" type="text/css" href="./styles.css" script~~
 
 #### npm scripts in `package.json`
 
