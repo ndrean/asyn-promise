@@ -103,9 +103,13 @@ promises
 
 ## Batch fetching
 
+[Back to start](#introduction)
+
 We use the same `Promise.all` but this time we slice the array of 'usersId' into smaller arrays; we then map to a promise on each subarrays to produce subarrays of promises. Finaly, we run `promise.all([])`.
 
 ## cache
+
+[Back to start](#introduction)
 
 We can use the cache to store `http GET` (only GET). To do so, we just declare a _cache_
 by giving it a name and add a stringified key/value `{request: reponse}` (we just need to declare _request_ in case of an _http fetch_).
