@@ -12,11 +12,13 @@
     "clean": "rm dist/*",
     "dev": "webpack --mode development --hot --config webpack.config.js --watch",
     "build": "webpack -p --mode production",
-    "serve": "webpack-dev-server --mode development --hot"
+    "serve": "webpack-dev-server"
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "form-data": "^3.0.0"
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.5.0",
+    "popper.js": "^1.16.1"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",

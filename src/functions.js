@@ -11,7 +11,7 @@ const display = (htmlID, response, text) => {
     .querySelector(htmlID)
     .insertAdjacentHTML(
       "beforeend",
-      `<span>${text}: ${response}  &nbsp | &nbsp</span> `
+      `<span>${text}: ${response}  &nbsp , &nbsp</span> `
     );
 };
 
@@ -35,7 +35,6 @@ const getByAsync = async (uri, nb, cacheName) => {
     // console.log("from cache await ", matchedCachedObj.data.email);
 
     const json = await check.json();
-    console.log(json);
     return await json.id; //json.data.id;
   } catch (error) {
     throw error;
@@ -54,8 +53,9 @@ const checkStatus = async (response) => {
 
 const getAxios = async (uri, i) => {
   try {
-    const response = await axios.get(uriu + i);
-    return display("#resu4", response.data.data.id, "Axios ");
+    const response = await axios.get(uri + i);
+    // no need parse json
+    return display("#resu4", response.data.id, "Axios ");
   } catch (error) {
     throw error;
   }

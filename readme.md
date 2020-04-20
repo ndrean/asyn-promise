@@ -1,4 +1,4 @@
-Demo of different `fetch` constructions **client-side** with a public API (endpoint: "https://reqres.in/api/users/" supporting `CORS` and `https`).
+Demo of different `fetch` constructions **client-side** with a public API (endpoint: "https://reqres.in/api/users/" supporting `CORS` and `https` or "https://jsonplaceholder.typicode.com/users/").
 
 We just render the ids in the browser to view the result of testing some fetch chaining strategies:
 
@@ -263,14 +263,14 @@ Instead of running commands for `webpack-cli` in the terminal, we can add helper
 {
 "scripts":{
 	"clean": "rm dist/*",
-	"dev": " webpack --mode development --hot --config webpack.config.js",
+	"dev": " webpack --mode development --hot --watch (--config webpack.config.js)",
 	"build": "webpack -p --mode production",
 	"serve": "webpack-dev-server"
 	}
 }
 ```
 
-We can now run in a terminal:
+We can now run in a terminal on of the following commands:
 
 ```bash
 yarn clean (this empties the '/dist' folder)
@@ -279,11 +279,12 @@ yarn build (bundles in production mode when ready to minimize and output in the 
 yarn serve (runs a development server)
 ```
 
-### Change Link to .js
+### Remove Link to _index.js_
 
-Since we will compile the project to the _main.js_ file in the _/dist_ folder, we make the script in the _index.html_ point to the output filename (`output: [...,filename: "main.js"])`) used in _webpack.config.js_
+We will compile the project to the _main.js_ file in the _/dist_ folder: this is declared in _webpack.config.js_
+with (`output: [...,filename: "main.js"])`).
 
-script type="module" ~~scr="index.js"~~ => src="main.js"> /script
+~~script type="module" scr="index.js"> /script~~
 
 ### Compile and launch _web-pack-dev-server_
 

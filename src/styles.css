@@ -1,23 +1,23 @@
 body {
-    margin: 0px;
+  margin: 0px;
 }
 
 .title {
-    color: blue;
-    font-weight: bold;
+  color: blue;
+  font-weight: bold;
 }
 
 .main {
-    font-size: 15px;
+  font-size: 15px;
 }
 
 .card {
-    /*display: inline-block;*/
-    border: 1px solid grey;
-    min-width: 30%;
-    height: auto;
+  /*display: inline-block;*/
+  border: 1px solid grey;
+  min-width: 30%;
+  height: auto;
 }
 
 .flex {
-    display: flex;
+  display: flex;
 }

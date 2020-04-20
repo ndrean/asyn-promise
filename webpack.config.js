@@ -19,7 +19,7 @@ const config = (mode) => {
     },
     devtool: "inline-source-map",
     plugins: [
-      // new CleanWebpackPlugin(),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         template: "src/index.html", //source
         filename: "index.html", // destination

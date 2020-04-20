@@ -7,7 +7,8 @@ import {
 } from "./functions.js";
 
 import { postFetch, postAxios } from "./form";
-
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 
 let l = 3; // max number of users in this API
@@ -116,9 +117,9 @@ promises
 
 /************* AXIOS ******************/
 //loop
-// for (let i = 1; i <= l; i++) {
-// getAxios(uriu, i).catch((err) => console.log(err));
-// }
+for (let i = 1; i <= l; i++) {
+  getAxios(uriu, i).catch((err) => console.log(err));
+}
 //page
 // getAllPageAxios(uriu, 1).catch((err) => console.log("Page AXIOS", err));
 

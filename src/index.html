@@ -9,61 +9,64 @@
 </head>
 
 <body>
-  <h1>Different <strong>http GETS & POST</strong> requests (loop, parallel, sequential) with FETCH and AXIOS from the
+  <h1>Loop, parallel & sequential <em>GET</em> requests with <em>fetch</em> and <em>Axios</em> from the
     browser
   </h1>
   <hr>
-  <h3 class="title">Simple loop on http requests with <strong>promise.then()</strong>
-    and <strong>async-await</strong></h3>
+  <h3 class="title">GET's loop with <em>promise.then()</em>
+    and <em>async-await</em></h3>
   <p>Two lot of GET request are run, and the rendered ids are not necessarilly ordered</p>
   <div id="start"></div>
   <hr>
 
 
-  <h3 class="title">Parallel fetch with <strong>Promise.all()</strong></h3>
+  <h3 class="title">Parallel GET's with <em>Promise.all()</em></h3>
   <p>A lot of 12 GET request is run, and the rendered ids are not necessarily ordered</p>
   <p id="resu1" class="main"></p>
   <hr />
-  <h3 class="title">Sequential loop fetch with a arrayOfPromises.reduce()</h3>
+  <h3 class="title">Sequential GET's loop fetch with a <em>arrayOfPromises.reduce()</em></h3>
   <p>The rendered ids will always be ordered</p>
   <p id="resu8" class="main"></p>
   <hr>
 
-  <h3 class="title">Batch fetch with <strong>slice - promise.all()</strong></h3 class="title">
+  <h3 class="title">Batch GET's with <em>slice - promise.all()</em></h3 class="title">
   <p>The ids are rendered by batch of 4 and are not necessarilly ordered within a batch</p>
   <p id="resu2" class="main"></p>
   <hr />
 
   <p id="resu3" class="main"></p>
   <hr>
-  <h3 class="title">Axios.get().then()</h3 class="title">
+  <h3 class="title"><em>Axios</em> GET</h3 class="title">
   <p>A lot of 12 GET request is run with Axios, and the rendered ids are not necessarily ordered</p>
   <p id="resu4" class="main"></p>
   <hr>
-  <h3 class="title">Axios await all</h3 class="title">
+  <h3 class="title">Axios all</h3 class="title">
   <p id="resu5" class="main"></p>
   <hr>
+  <h1><em>POST</em> requests with <em>FormData</em>, <em>fetch</em> and <em>Axios</em> from the
+    browser
+  </h1>
   <h3 class="title">Posting data</h3 class="title">
   <div class="flex">
     <div class='card'>
       <h5 class="title">Inputs</h5>
-      <form id="axios" method="post">
+      <form id="axios" method="post" class='form-group'>
         <p>
           <label for="name">Your name</label>
-          <input id="name" type="text" name="first_name">
+          <input id="name" type="text" name="title">
         </p>
         <p>
           <label for="job">Your job</label>
-          <input id="job" type="text" name="his_job">
+          <input id="job" type="text" name="body">
         </p>
         <p>
-          <button type="submit">Post it!</button>
+          <button type="submit" class="btn btn-primary">Post it!</button>
         </p>
       </form>
     </div>
 
     <div class='card'>
-      <h5 class="title">Posted by Fetch</h5>
+      <h5 class="title">Posted by fetch</h5>
       <p id="resu6" class="main"></p>
     </div>
     <div class='card'>
