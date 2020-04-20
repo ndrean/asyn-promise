@@ -142,7 +142,7 @@ Implementation of alternative library `Axios`: looping, page fetching and post.
 
 TODO
 
-## Bundling - `browserify`
+## Bundling _browserify_
 
 If we want to work with `indexedDB`, we can use the `npm` package [idb][1]. To do so, we have a working file _index.js_ that contains the code using `idb`. To use it, we need to require the module `idb`, so we need to bundle it. We can use a quick tool such as the `npm` package [browserify][2]:
 
@@ -157,7 +157,7 @@ If we want to work with `indexedDB`, we can use the `npm` package [idb][1]. To d
 [1]: https://www.npmjs.com/package/idb "idb"
 [2]: http://browserify.org/ "browserify"
 
-## Bundling Webpack
+## Bundling _Webpack_
 
 ### Install `npm` packages
 
@@ -188,12 +188,12 @@ Our files system should look like
 |-readme.md
 |-package.json
 |-yarn.lock
-|-/scr
---|-/img
---|-index.html
---|-index.js
---|-...
 |-/dist
+|-/scr
+|-|-/img
+|-|-index.html
+|-|-index.js
+|-|-...
 ```
 
 ### Gitignore
@@ -295,15 +295,15 @@ yarn serve (runs a development server)
 
 Since we will compile the project to the _main.js_ file in the _/dist_ folder, we make the script in the _index.html_ point to the output filename (`output: [...,filename: "main.js"])`) used in _webpack.config.js_
 
-script type="module" ~~~scr="index.js"~~~ => src="main.js"> /script
+script type="module" ~~scr="index.js"~~ => src="main.js"> /script
 
-### Compile and launch `web-pack-dev-server`
+### Compile and launch _web-pack-dev-server_
 
 To compile the project, we run in the terminal the _npm_ scripts helpers that we defined: `yarn dev` or `yarn build` once it's finished.
 
 Once the compilation is made, with this config, we will serve the files with `webpack-dev-server` so that the `--watch` mode is automatically on, meaning that it will recompile automatically whenever files change (HTML or CSS or Javascript) so that we don't have to reload the page or stop/start the web server.
 
-### Notes for `Parcel.js`
+### Notes for _Parcel.js_
 
 - Firstly, we need a file `index.html` and create a directory `/src` and put all our files inside. The main js file will be named `/src/index.js`. The link to this file should be declared in the _index.html_ file **without type="module"** (which is needed for `webpack`otherwise).
 
