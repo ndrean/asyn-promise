@@ -1,3 +1,14 @@
+---
+title: fetch strategies
+navigation:
+  - section: Simple loop
+  - section: Parallel
+  - section: Sequential
+  - section: Batch
+  - section: cache & Workbox
+  - section bundking: Webpack
+---
+
 ## Introduction
 
 Demo of different `fetch` constructions **client-side**. We just render the ids in the browser to view the result of testing some fetch chaining strategies. We used a public API (endpoint: "https://reqres.in/api/users/" supporting `CORS` and `https` or "https://jsonplaceholder.typicode.com/users/"). The data is saved in _cache_. A link to a live demo using [surge](https://surge.sh/).
