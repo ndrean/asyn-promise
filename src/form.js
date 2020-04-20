@@ -27,28 +27,28 @@ const postFetch = async (uri, formData) => {
   try {
     const response = await fetch(uri, { method: "POST", body: formData });
     const result = await response.json();
-    console.log(result);
     return await displayInput("#resu6", "New ID :", result.id).then(() =>
       displayPost("#resu6", formData).then(formReset(formData))
     );
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 
 const postAxios = async (uri, formData) => {
   try {
+    const response = await axios.post({
+      url: uri,
+      method: "post",
+      data: formData,
+    });
+    const result = await response.json();
+    return await display("#resu9", result.data.id, "Post Axios")
+      .then(() => display("#resu9", formData))
+      .then(formReset(formData));
   } catch (err) {
-    console.log(err);
+    throw err;
   }
-  return await axios
-    .post({ url: uri, method: "post", data: formData })
-    .then((res) => res.json())
-    .then((result) => {
-      console.log(result);
-      // display("#resu9", result.data.id, "Post Axios");
-    })
-    .then(formReset(formData));
 };
 
 export { postAxios, postFetch };

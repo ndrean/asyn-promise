@@ -1,7 +1,9 @@
+const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config = (mode) => {
   return {
@@ -13,15 +15,21 @@ const config = (mode) => {
     },
     devtool: "inline-source-map",
     plugins: [
-      new CleanWebpackPlugin(),
+      new CleanWebpackPlugin(["dist"]),
       new HtmlWebpackPlugin({
         template: "src/index.html", //source
         filename: "index.html", // destination
       }),
       new CopyWebpackPlugin([{ from: "src/img", to: "img/" }]),
+      new MiniCssExtractPlugin(),
     ],
     module: {
-      rules: [{ test: /\.css$/i, use: ["style-loader", "css-loader"] }],
+      rules: [
+        {
+          test: /\.css$/i,
+          use: ["MiniCssExtractPlugin", "style-loader", "css-loader"],
+        },
+      ],
     },
   };
 };
