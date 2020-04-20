@@ -250,6 +250,19 @@ We have defined how to import CSS files in _webpack.config.js_, namely how to fi
 
 - we remove (because of `style-loader`) the link in the header of the _index.html_ file: ~~script link rel="stylesheet" type="text/css" href="./styles.css" script~~
 
+### Hot reload
+
+We configured:
+
+```javascript
+devServer: {
+  contentBase: "./src/", //absolute path recommendedpath.resolve(__dirname, "src"),
+  watchContentBase: true, // full page reload, for the static html change
+},
+```
+
+and use with `webpack --mode development --hot --watch` compilation mode.
+
 ### npm scripts in `package.json`
 
 Webpack is configured within the file `webpack.config.js`. With the CLI, we can run commands like `yarn webpack --mode development --config webpack.config.js` to compile in development mode for example. Webpack will use the default configuration file `webpack.config.js` of webpack if present.

@@ -13,8 +13,8 @@ const config = (mode) => {
       filename: "main.js", // destination: all-in-one bundle file
     },
     devServer: {
-      contentBase: "./src/", //path.resolve(__dirname, "src"),
-      watchContentBase: true,
+      contentBase: "./src/", //absolute path recommendedpath.resolve(__dirname, "src"),
+      watchContentBase: true, // full page reload, for the static html change
     },
     devtool: "inline-source-map",
     plugins: [
