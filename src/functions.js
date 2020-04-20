@@ -1,10 +1,10 @@
-// const uriu = "https://jsonplaceholder.typicode.com/users/";
+const uriu = "https://jsonplaceholder.typicode.com/users/";
 // const uriu = "https://jsonplaceholder.typicode.com/posts/";
 
 // const axios = require("axios").default;
 import axios from "axios";
 
-const uriu = "https://reqres.in/api/users/";
+// const uriu = "https://reqes.in/api/users/";
 
 const display = (htmlID, response, text) => {
   document
@@ -19,8 +19,10 @@ const getByAsync = async (uri, nb, cacheName) => {
   try {
     const request = new Request(`${uri}${nb}`);
     const response = await fetch(request);
-    if (!response.ok) {
-      throw response.statusText;
+    const check = await checkStatus(response);
+    if (!check.ok) {
+      console.log(check.ok);
+      throw check.statusText;
     }
     // add to cache
     const newCache = await caches.open(cacheName);
@@ -30,10 +32,11 @@ const getByAsync = async (uri, nb, cacheName) => {
     //display in console from cache
     const responseFromCache = await caches.match(request);
     const matchedCachedObj = await responseFromCache.json();
-    // console.log("cachedObj async/await ", matchedCachedObj.data.email);
+    // console.log("from cache await ", matchedCachedObj.data.email);
 
-    const json = await response.json();
-    return await json.data.id;
+    const json = await check.json();
+    console.log(json);
+    return await json.id; //json.data.id;
   } catch (error) {
     throw error;
   }
@@ -42,33 +45,11 @@ const getByAsync = async (uri, nb, cacheName) => {
 // add origin header on request
 
 // helper
-const checkStatus = (response) => {
+const checkStatus = async (response) => {
   if (!response.ok) {
-    return Promise.reject(new Error(response));
+    return await Promise.reject(new Error(response));
   }
-  return Promise.resolve(response);
-};
-
-const getByPromise = async (uri, nb, cacheName) => {
-  const request = uri + nb;
-  return (
-    fetch(request)
-      .then((res) => checkStatus(res))
-      .then((res) => res.json())
-      .then((res) => {
-        return res.data.id;
-      })
-      // saving in cache
-      .then(() => caches.open(cacheName))
-      .then((cache) => {
-        cache.add(request); // cache.put(request, response) if not from web
-      })
-      // displaying cache in console
-      .then(() => caches.match(request))
-      .then((res) => res.json())
-      .then((resjson) => console.log("from cache :", resjson.data.first_name))
-      .catch((err) => console.log("BAD PROMISE :", err.message))
-  );
+  return await Promise.resolve(response);
 };
 
 const getAxios = async (uri, i) => {
@@ -95,4 +76,4 @@ const getAllPageAxios = async (uri, page) => {
   });
 };
 
-export { display, getByAsync, getByPromise, uriu, getAxios, getAllPageAxios };
+export { display, getByAsync, uriu, getAxios, getAllPageAxios };

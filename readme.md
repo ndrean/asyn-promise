@@ -2,7 +2,7 @@ Demo of different `fetch` constructions **client-side** with a public API (endpo
 
 We just render the ids in the browser to view the result of testing some fetch chaining strategies:
 
-- [Simple loop](#versions-of-fetch-and-cache-API) with 2 constructions: `async/await` and `promise.then()`
+- [Simple loop](#versions-of-fetch-and-cache-API) with the construction: `async/await`
 
 - [Parallel](#parallel-fetching) fetching by using `promise.all()` on an array of promises
 
@@ -18,9 +18,7 @@ We just render the ids in the browser to view the result of testing some fetch c
 
 - [Bundling Webpack](#bundling)
 
-The data is saved in `cache`.
-
-TODO: `indexedDB`
+The data is saved in _cache_.
 
 ### Live demo app at:
 
@@ -38,15 +36,10 @@ TODO: `indexedDB`
 
 - <https://decembersoft.com/posts/promises-in-serial-with-array-reduce/>
 
-## Versions of fetch and cache API
-
-Two versions of fetch:
-
-- `new Promise` with `resolve/reject` and `then()` chaining
+## `fetch` and _cache_ API
 
 - `async await` with `try/catch`.
-
-The `cache API` is also implemented with `await` and `then()` versions
+- The _cache API_ is also implemented with `await`.
 
 ## Parallel fetching
 
@@ -102,12 +95,9 @@ promises
 
 We use the same `Promise.all` but this time we slice the array of 'usersId' into smaller arrays; we then map to a promise on each subarrays to produce subarrays of promises. Finaly, we run `promise.all([])`.
 
-> source: https://www.freecodecamp.org/news/promise-all-in-javascript-with-example-6c8c5aea3e32/
-
 ## cache
 
 We can use the cache to store `http GET` (only GET). To do so, we just declare a _cache_
-
 by giving it a name and add a stringified key/value `{request: reponse}` (just _request_ in case of an http fetch).
 
 ```javascript
@@ -121,12 +111,10 @@ await newCache.add(request);
 ```
 
 To review it, we can inspect _Application/cache_ in Chrome or display it in the console
-
 with the snippet below:
 
 ```javascript
 // we look for the request in the cache
-
 const responseFromCache = await caches.match(request);
 // then we parse it
 const matchedCachedObj = await responseFromCache.json();
@@ -247,20 +235,20 @@ module.exports  =  config();
 
 ### Note on CSS
 
-We added the packages `css-loader` and `style-loader` packages firstly (declared in `package.json`).
+We added the packages `css-loader` (for the `import`) and `style-loader` (to inject as _style_ in pages) packages firstly (declared in `package.json`).
 
 We have defined how to import CSS files in _webpack.config.js_, namely how to find them and them compile and inject the styles:
 
 > `module: {rules: [{ test: /\.css$/, use: ["style-loader", "css-loader"] }]}`
 
-We also have to add `import "./styles.css"` within _index.js_
+- We add `import "./styles.css"` within _index.js_
 
 ```javascript
 #index.js
 + import "./styles.css"
 ```
 
-and remove the link in the header of the _index.html_ file: ~~script link rel="stylesheet" type="text/css" href="./styles.css" script~~
+- we remove (because of `style-loader`) the link in the header of the _index.html_ file: ~~script link rel="stylesheet" type="text/css" href="./styles.css" script~~
 
 ### npm scripts in `package.json`
 
