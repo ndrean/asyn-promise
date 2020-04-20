@@ -158,39 +158,27 @@ If we want to work with `indexedDB`, we can use the `npm` package [idb][1]. To d
 
 ### Webpack
 
-We first install locally `webpack` with:
+We first install locally `webpack` with all needed dependencies:
 
 ```bash
-yarn add webpack webpack-cli -D
+yarn add webpack webpack-cli webpack-dev-server copy-webpack-plugin html-webpack-plugin css-loader style-loader -D
 ```
 
-Since we used `Axios`, instead of using the following cdn script in the `index.html`file:
+Since we used `Axios`, instead of adding the following cdn script in the `index.html`file:
 
 `<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>`
 
-we import the package and add the following in the Javascript files where needed:
-
-```bash
-yarn add axios
-```
-
-and add the import where needed in our .js files:
+we import the package with `yarn add axios` and add the import where needed in our .js files:
 
 ```javascript
 import axios from "axios";
 ```
 
-With the CLI, we can run commands like `yarn webpack --mode development --config webpack.config.js` to compile in development mode. Webpack will use the default configuration file `webpack.config.js` of webpack if present.
+We will create two configurations for Webpack, development mode and production mode. Webpack is configured within the file `webpack.config.js`. With the CLI, we can run commands like `yarn webpack --mode development --config webpack.config.js` to compile in development mode for example. Webpack will use the default configuration file `webpack.config.js` of webpack if present.
 
 > the `webpack.config.js` file is picked by default if present, so we can not mention it
 
-Instead of running long commands for `webpack-cli` in the terminal, we can add helpers by adding `npm scripts` to the `package.json` file. First we build the `package.json` file with:
-
-```bash
-yarn init
-```
-
-so that we can run in a terminal:
+Instead of running commands for `webpack-cli` in the terminal, we can add helpers by adding `npm scripts` to the `package.json` file. First we build the `package.json` file with ther terminal command `yarn init` so that we can run in a terminal:
 
 - yarn clean (this empties the directory '/dist')
 - yarn dev (bundles in development mode)
@@ -240,13 +228,19 @@ const config = (mode) {
   },
   devtool: "inline-source-map", // helper ot locate errors
   plugins: [
+    // clean folder between runs
+    new CleanWebpackPlugin(),
+    //will automatically inject bundle js into ./dist/index.html
     new HtmlWebpackPlugin({
       template: "src/index.html",
       filename: "index.html",
     }),
+    //copy assets not explicitely referenced from our Javascript
+    new CopyWebpackPlugin([
+      { from: "src/img", to: "img/" }]),
   ],
   module: { // to compile the CSS files
-      rules: [{ test: /\.css$/, use: "css-loader" }],
+      rules: [{ test: /\.css$/, use: ["style-loader", "css-loader"] }],
     },
 };
 
@@ -254,10 +248,16 @@ module.exports = config();
 
 ```
 
+> We have defined how to import CSS files. We need to load the `css-loader` and `style-loader` packages firstly, declare how to find them and them compile and inject the styles. We also have to add `import "./styles.css"` within `index.js` and remove the link in the header of the index.html file.
+
+> #index.js import "./styles.css"
+> index.html <s><link rel="stylesheet" type="text/css" href="./styles.css"></s>
+
 > Since we will compile the project to the `main.js` file in the '/dist' directory, we make the script in the 'index.html' point to the output filename used in 'webpack.config.js' (output: [...,filename: main.js'])
+
 > `index.html` <script type="module" src="main.js"> </script>
 
-To compile the project, we run `yarn dev` or `yarn build` once it's finished.
+To compile the project, we run the npm scripts helpers that we defined: `yarn dev` or `yarn build` once it's finished.
 
 Once the compilation is made, with this config, we will serve the files with `webpack-dev-server` so that the `--watch` mode is automatically on, meaning that it will recompile automatically whenever files change (HTML or CSS or Javascript) so that we don't have to reload the page or stop/start the web server.
 

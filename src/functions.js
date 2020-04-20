@@ -66,10 +66,8 @@ const getByPromise = async (uri, nb, cacheName) => {
       )
       // displaying cache in console
       .then(
-        caches
-          .match(request)
-          .then((result) => result.json())
-          .then((rjson) => console.log("from cache :", rjson.data.first_name))
+        caches.match(request).then((result) => result.json())
+        // .then((rjson) => console.log("from cache :", rjson.data.first_name))
       )
       .catch((err) => console.log("BAD PROMISE :", err.message))
   );
@@ -80,7 +78,7 @@ const getAxios = async (uri, i) => {
     const response = await axios.get(uriu + i);
     return display("#resu4", response.data.data.id, "Axios ");
   } catch (error) {
-    console.log("Axios ", error);
+    throw error;
   }
 };
 

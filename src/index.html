@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
-  <link rel="stylesheet" href="./src/styles.css">
+  <!-- <link rel="stylesheet" type="text/css" href="./styles.css"> -->
 </head>
 
 <body>
@@ -42,13 +42,37 @@
   <h3 class="title">Axios await all</h3 class="title">
   <p id="resu5" class="main"></p>
   <hr>
-  <h3 class="title">Axios Post</h3 class="title">
-  <p id="resu6" class="main"></p>
+  <h3 class="title">Fetch Post</h3 class="title">
+  <div class="flex">
+    <div class='card'>
+      <form id="axios" method="post">
+        <p>
+          <label for="name">Your name</label>
+          <input id="name" type="text" name="first_name">
+        </p>
+        <p>
+          <label for="job">Your job</label>
+          <input id="job" type="text" name="his_job">
+        </p>
+        <p>
+          <button type="submit">Post it!</button>
+        </p>
+      </form>
+    </div>
+
+    <div class='card'>
+      <p id="resu6" class="main">View</p>
+    </div>
+  </div>
+  <hr>
+  <h3 class="title">Axios post</h3 class="title">
+  <p id="resu9" class="main"></p>
+
   <hr>
   <p id="resu7" class="main"></p>
 
   <!-- type="module" since we import 'axios' in the script 'functions.js' -->
-  <script type="module" src="main.js"></script>
+  <script type="module" src="index.js"></script>
 
 </body>
 

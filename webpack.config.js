@@ -1,24 +1,27 @@
-// const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const config = (mode) => {
   return {
     mode,
-    entry: "./src/index.js",
+    entry: "./src/index.js", // source
     output: {
       path: path.resolve(__dirname, "dist"),
-      filename: "main.js",
+      filename: "index.js", // destination: all-in-one bundle file
     },
     devtool: "inline-source-map",
     plugins: [
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        template: "src/index.html",
-        filename: "index.html",
+        template: "src/index.html", //source
+        filename: "index.html", // destination
       }),
+      new CopyWebpackPlugin([{ from: "src/img", to: "img/" }]),
     ],
     module: {
-      rules: [{ test: /\.css$/, use: "css-loader" }],
+      rules: [{ test: /\.css$/i, use: ["style-loader", "css-loader"] }],
     },
   };
 };
