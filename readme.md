@@ -209,16 +209,18 @@ We add `.cache node_modules dist` in the _.gitignore_ file.
 
 ### `webpack.config.js`
 
-The Webpack configuration file is presented here as a function so that we can running `webpack --mode production` will assign `config(production)`
+Here is a simple Webpack configuration file:
 
 ```javascript
 # webpack.config.js
 const  webpack  =  require("webpack");
 const  path  =  require("path");
 const  HtmlWebpackPlugin  =  require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
-const  config  = (mode) {
-  mode,
+module.exports = {
+
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"), // our distribution directory will be: `/dist
@@ -246,7 +248,6 @@ const  config  = (mode) {
     rules: [{ test: /\.css$/, use: ["style-loader", "css-loader"] }],
   },
 };
-module.exports  =  config();
 ```
 
 ### Note on CSS
