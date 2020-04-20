@@ -10,9 +10,9 @@
     "devp": "parcel index.html",
     "buildp": "parcel build index.html",
     "clean": "rm dist/*",
-    "dev": "webpack --env.mode development --hot --config webpack.config.js --watch",
-    "build": "webpack -p --env.mode production",
-    "serve": "webpack-dev-server --env.mode development --hot"
+    "dev": "webpack --mode development --hot --config webpack.config.js --watch",
+    "build": "webpack -p --mode production",
+    "serve": "webpack-dev-server --mode development --hot"
   },
   "dependencies": {
     "axios": "^0.19.2",

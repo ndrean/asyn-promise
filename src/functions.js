@@ -25,7 +25,7 @@ const getByAsync = async (uri, nb, cacheName) => {
     // add to cache
     const newCache = await caches.open(cacheName);
     await newCache.add(request); // if 200
-    // <=> cache.put(request, response = await fetch(request)) for anything (include not from web)
+    // <=> cache.put(request, response=await fetch(request)) for anything (include not from web)
 
     //display in console from cache
     const responseFromCache = await caches.match(request);
@@ -54,21 +54,19 @@ const getByPromise = async (uri, nb, cacheName) => {
   return (
     fetch(request)
       .then((res) => checkStatus(res))
-      .then((result) => result.json())
-      .then((response) => {
-        return response.data.id;
+      .then((res) => res.json())
+      .then((res) => {
+        return res.data.id;
       })
       // saving in cache
-      .then(
-        caches.open(cacheName).then((cache) => {
-          cache.add(request); // cache.put(request, response) if not from web
-        })
-      )
+      .then(() => caches.open(cacheName))
+      .then((cache) => {
+        cache.add(request); // cache.put(request, response) if not from web
+      })
       // displaying cache in console
-      .then(
-        caches.match(request).then((result) => result.json())
-        // .then((rjson) => console.log("from cache :", rjson.data.first_name))
-      )
+      .then(() => caches.match(request))
+      .then((res) => res.json())
+      .then((resjson) => console.log("from cache :", resjson.data.first_name))
       .catch((err) => console.log("BAD PROMISE :", err.message))
   );
 };

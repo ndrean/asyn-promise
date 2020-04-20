@@ -47,6 +47,7 @@ const f = async (callback, uri, userID, consoleText, cacheName) => {
 
 for (let i = 1; i <= l; i++) {
   f(getByAsync, uriu, i, "Loop Await", "Ind_Async")
+    .catch((err) => console.log(err))
     .then(f(getByPromise, uriu, i, "Loop Promise", "Ind_Promise"))
     .catch((error) => console.log(error));
 }
@@ -58,7 +59,7 @@ const fetchBatch = async (users, name) => {
   for (let i = 0; i <= l; i += p) {
     const slicedRequests = users.slice(i, i + p).map(async (userID) => {
       return getByAsync(uriu, userID, name).then((r) =>
-        display("#resu2", r, "(Batch: # " + i + ")")
+        display("#resu2", r, "(Batch # " + i + ")")
       );
       // .catch((err) => console.log("batch", err, userID));
     });
@@ -96,7 +97,8 @@ promises
     arrayOfResults.forEach((result) => {
       display("#resu8", result, "Sequence ");
     });
-  });
+  })
+  .catch((err) => console.log(err));
 
 // Promise.resolve([])
 //   .then((r) => {
