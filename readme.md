@@ -264,12 +264,7 @@ We also have to add `import "./styles.css"` within _index.js_ and remove the lin
 + import "./styles.css"
 ```
 
-```html
-# index.html
-<script>
-  <s>link rel="stylesheet" type="text/css" href="./styles.css"</s>;
-</script>
-```
+~~~script link rel="stylesheet" type="text/css" href="./styles.css" script~~~
 
 #### npm scripts in `package.json`
 
@@ -306,7 +301,7 @@ Since we will compile the project to the _main.js_ file in the _/dist_ folder, w
 
 > # index.html
 
-> script type="module" ~~~scr="index.js"~~~ => src="main.js"> /script
+script type="module" ~~~scr="index.js"~~~ => src="main.js"> /script
 
 ### Compile and launch `web-pack-dev-server`
 
@@ -318,9 +313,7 @@ Once the compilation is made, with this config, we will serve the files with `we
 
 - Firstly, we need a file `index.html` and create a directory `/src` and put all our files inside. The main js file will be named `/src/index.js`. The link to this file should be declared in the _index.html_ file **without type="module"** (which is needed for `webpack`otherwise).
 
-> index.html
-
-> script ~~~type="module"~~~ src="src/index.js"> /script
+script ~~~type="module"~~~ src="src/index.js"> /script
 
 - Then since we use `async/await`, we can limit the accepted of browsers to those who accept ES5, through the file `package.json` ( if we use the bundler `Parcel`)
 
