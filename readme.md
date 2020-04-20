@@ -59,25 +59,15 @@ Suppose we have a fixed number of tasks/promises. If we simply do `promise1.then
 ```javascript
 
 Promise.resolve()
-
-.then((r) => {
-
-return promise1.then((r) =>  display(...));
-
+  .then((r) => {
+    return promise1.then((r) =>  display(...));
 })
-
-.then((r) => {
-
-return promise2.then((r) =>  display(...));
-
+  .then((r) => {
+    return promise2.then((r) =>  display(...));
 })
-
-.then((r) => {
-
-return promise3.then((r) =>  display(...));
-
+  .then((r) => {
+    return promise3.then((r) =>  display(...));
 });
-
 ```
 
 https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/reduce
@@ -91,37 +81,21 @@ We will capture the result and push it to the array, further used as `arrayOfRes
 then used to display results in the browser with our `display`method.
 
 ```javascript
-
 promises
-
-.reduce((promiseChain, currentPromise) => {
-
-return promiseChain.then((result) => {
-
-return currentPromise.then((currentResult) => {return [...result, currentResult}]);
-
-// we return an array that is used as "arrayOfResults"
-
-});
-
+  .reduce((promiseChain, currentPromise) => {
+    return promiseChain.then((result) => {
+    return currentPromise.then((currentResult) => {return [...result, currentResult}]);
+  // we return an array that is used as "arrayOfResults"
+  });
 }, Promise.resolve([])) // the initial value
-
-// we use the result array (simply indexes) to render in the browser
-
-.then((arrayOfResults) => {
-
-console.log(arrayOfResults);
-
-arrayOfResults.forEach((result) => {
-
-console.log(result);
-
-display("#resu8", result, "Seq :");
-
+  // we use the result array (simply indexes) to render in the browser
+  .then((arrayOfResults) => {
+    console.log(arrayOfResults);
+  arrayOfResults.forEach((result) => {
+    console.log(result);
+  display("#resu8", result, "Seq :");
+  });
 });
-
-});
-
 ```
 
 ## Batch fetching
@@ -138,17 +112,11 @@ by giving it a name and add a stringified key/value `{request: reponse}` (just _
 
 ```javascript
 const request = new Request(url);
-
 const response = await fetch(request);
-
 // create/open a new named cache
-
 const newCache = await caches.open("cacheName");
-
 // add the {request:response}
-
 await newCache.add(request);
-
 // await cache.put(request, response) if not from web
 ```
 
@@ -160,21 +128,15 @@ with the snippet below:
 // we look for the request in the cache
 
 const responseFromCache = await caches.match(request);
-
 // then we parse it
-
 const matchedCachedObj = await responseFromCache.json();
-
 // and review in the console:
-
 console.log("cacheName", matchedCachedObj.data.email);
 ```
 
 ## AXIOS
 
 Implementation of alternative library `Axios`: looping, page fetching and post.
-
----
 
 ## Workbox
 
@@ -210,23 +172,22 @@ yarn init (-y)
 We then install `webpack` with all needed dependencies: `--dev` or `-D`to install locally:
 
 ```bash
-
 yarn add webpack webpack-cli webpack-dev-server copy-webpack-plugin html-webpack-plugin css-loader style-loader -D
-
 ```
 
 Since we used `Axios`, instead of adding the following cdn script in the `index.html`file:
 
 ```html
-#index.html (body) `
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-`
+#index.html (body)
+<script <s>
+  src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"</s>
+</script>
 ```
 
 we import the package with `yarn add axios` and add the import where needed in our .js files:
 
 ```javascript
-import axios from "axios";
++ import axios from "axios";
 ```
 
 #### Directory setup
@@ -234,29 +195,16 @@ import axios from "axios";
 Our files system should look like
 
 ```bash
-
 |-.cache (if Parcel)
-
 |-node_modules
-
 |-.gitignore
-
 |-readme.md
-
-
-
 |-package.json
-
 |-yarn.lock
-
 |-/scr
-
 --|-index.html
-
 --|-index.js
-
 --|-...
-
 |-/dist
 ```
 
@@ -264,16 +212,7 @@ Our files system should look like
 
 We add `.cache node_modules dist` in the _.gitignore_ file.
 
-> Note for `Parcel.js`. > Firstly, we need a file `index.html` and create a directory `/src` and put all our files inside. The main js file will be named `/src/index.js`. The link to this file should be declared in the _index.html_ file **without type="module"** (which is needed for `webpack`otherwise). Then since we use `async/await`, we can limit the accepted of browsers to those who accept ES5, through the file `package.json` ( if we use the bundler `Parcel`)
-
-```html
-<script <s>
-  type="module"</s>  src="src/index.js">
-</script>
-```
-
 ```javascript
-
 #package.json
 // mainly for Parcel
 	"browserslist": [ "since  2017-06" ]
@@ -284,67 +223,37 @@ We add `.cache node_modules dist` in the _.gitignore_ file.
 We will create two configurations for Webpack, development mode and production mode. The Webpack configuration file is presented here as a function so that we can running `webpack --mode production` will assign `config(production)`
 
 ```javascript
-
 # webpack.config.js
-
 const  webpack  =  require("webpack");
-
 const  path  =  require("path");
-
 const  HtmlWebpackPlugin  =  require("html-webpack-plugin");
 
-
-
 const  config  = (mode) {
-
-mode,
-
-entry: "./src/index.js",
-
-output: {
-
-path: path.resolve(__dirname, "dist"), // our distribution directory will be: `/dist
-
-filename: "main.js", // the name of the final JS file
-
-},
-
-devtool: "inline-source-map", // helper ot locate errors
-
-plugins: [
-
-// clean folder between runs
-
-new  CleanWebpackPlugin(),
-
-//will automatically inject bundle js into ./dist/index.html
-
-new  HtmlWebpackPlugin({
-template: "src/index.html",
-
-filename: "index.html",
-
-}),
-
-//copy assets not explicitely referenced from our Javascript
-
-new  CopyWebpackPlugin([
-
-{ from: "src/img", to: "img/" }]),
-
-],
-
-module: { // to compile the CSS files
-
-rules: [{ test: /\.css$/, use: ["style-loader", "css-loader"] }],
-
-},
-
+  mode,
+  entry: "./src/index.js",
+  output: {
+    path: path.resolve(__dirname, "dist"), // our distribution directory will be: `/dist
+    filename: "main.js", // the name of the final JS file
+  },
+  devtool: "inline-source-map", // helper ot locate errors
+  plugins: [
+  // clean folder between runs
+  new  CleanWebpackPlugin(),
+  //will automatically inject bundle js into ./dist/index.html
+  new  HtmlWebpackPlugin({
+    template: "src/index.html",
+    filename: "index.html",
+  }),
+  //copy assets not explicitely referenced from our Javascript
+  new  CopyWebpackPlugin([
+    { from: "src/img", to: "img/" }
+    ]),
+  ],
+  module: { // to compile the CSS files
+    rules: [{ test: /\.css$/, use: ["style-loader", "css-loader"] }],
+  },
 };
 module.exports  =  config();
-
-
-
 ```
 
 #### Note on CSS
@@ -363,7 +272,10 @@ We also have to add `import "./styles.css"` within _index.js_ and remove the lin
 ```
 
 ```html
-# index.html: <s>link rel="stylesheet" type="text/css" href="./styles.css"</s>
+# index.html
+<script>
+  <s>link rel="stylesheet" type="text/css" href="./styles.css"</s>;
+</script>
 ```
 
 #### npm scripts in `package.json`
@@ -389,10 +301,10 @@ Instead of running commands for `webpack-cli` in the terminal, we can add helper
 We can now run in a terminal:
 
 ```bash
-- yarn clean (this empties the '/dist' folder)
-- yarn dev (bundles in development mode)
-- yarn build (bundles in production mode when ready to minimize and output in the '/dist' folder)
-- yarn serve (runs a development server)
+yarn clean (this empties the '/dist' folder)
+yarn dev (bundles in development mode)
+yarn build (bundles in production mode when ready to minimize and output in the '/dist' folder)
+yarn serve (runs a development server)
 ```
 
 #### Change Link to .js
@@ -400,8 +312,10 @@ We can now run in a terminal:
 Since we will compile the project to the _main.js_ file in the _/dist_ folder, we make the script in the _index.html_ point to the output filename (`output: [...,filename: "main.js"])`) used in _webpack.config.js_
 
 ```html
-# index.html
-<script type="module" src="main.js"></script>
+# index.html +
+<script type="module" scr="<s">
+  "index.js"</s> =>  src="main.js">
+</script>
 ```
 
 ### Compile and launch `web-pack-dev-server`
@@ -409,6 +323,24 @@ Since we will compile the project to the _main.js_ file in the _/dist_ folder, w
 To compile the project, we run in the terminal the _npm_ scripts helpers that we defined: `yarn dev` or `yarn build` once it's finished.
 
 Once the compilation is made, with this config, we will serve the files with `webpack-dev-server` so that the `--watch` mode is automatically on, meaning that it will recompile automatically whenever files change (HTML or CSS or Javascript) so that we don't have to reload the page or stop/start the web server.
+
+### Notes for `Parcel.js`
+
+Firstly, we need a file `index.html` and create a directory `/src` and put all our files inside. The main js file will be named `/src/index.js`. The link to this file should be declared in the _index.html_ file **without type="module"** (which is needed for `webpack`otherwise).
+
+```html
+<script <s>
+  type="module"</s>  src="src/index.js">
+</script>
+```
+
+Then since we use `async/await`, we can limit the accepted of browsers to those who accept ES5, through the file `package.json` ( if we use the bundler `Parcel`)
+
+```javascript
+#package.json
+// mainly for Parcel
+	"browserslist": [ "since  2017-06" ]
+```
 
 ## Error handling
 
