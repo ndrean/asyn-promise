@@ -173,15 +173,13 @@ Since we used `Axios`, instead of adding the following cdn script in the _index.
 
 > index.html (body)
 
-> script ~~~ src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ~~~/script
-
-````
+> script ~~ src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ~~/script
 
 we import the package with `yarn add axios` and add the import where needed in our _.js_ files:
 
 ```javascript
 + import axios from "axios";
-````
+```
 
 #### Directory setup
 
@@ -205,9 +203,10 @@ Our files system should look like
 
 We add `.cache node_modules dist` in the _.gitignore_ file.
 
+> Exclude browsers that does not accept ES5
+
 ```javascript
 #package.json
-// mainly for Parcel
 	"browserslist": [ "since  2017-06" ]
 ```
 
@@ -264,7 +263,7 @@ We also have to add `import "./styles.css"` within _index.js_ and remove the lin
 + import "./styles.css"
 ```
 
-~~~script link rel="stylesheet" type="text/css" href="./styles.css" script~~~
+~~script link rel="stylesheet" type="text/css" href="./styles.css" script~~
 
 #### npm scripts in `package.json`
 
@@ -313,9 +312,9 @@ Once the compilation is made, with this config, we will serve the files with `we
 
 - Firstly, we need a file `index.html` and create a directory `/src` and put all our files inside. The main js file will be named `/src/index.js`. The link to this file should be declared in the _index.html_ file **without type="module"** (which is needed for `webpack`otherwise).
 
-it is ~~~ok~~~~
+it is ~~ok~~~
 
-script ~~~type="module"~~~ src="src/index.js"> /script
+script ~~type="module"~~ src="src/index.js"> /script
 
 - Then since we use `async/await`, we can limit the accepted of browsers to those who accept ES5, through the file `package.json` ( if we use the bundler `Parcel`)
 
