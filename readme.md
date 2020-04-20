@@ -1,14 +1,3 @@
----
-title: fetch strategies
-navigation:
-  - section: Simple loop
-  - section: Parallel
-  - section: Sequential
-  - section: Batch
-  - section: cache & Workbox
-  - section bundking: Webpack
----
-
 ## Introduction
 
 Demo of different `fetch` constructions **client-side**. We just render the ids in the browser to view the result of testing some fetch chaining strategies. We used a public API (endpoint: "https://reqres.in/api/users/" supporting `CORS` and `https` or "https://jsonplaceholder.typicode.com/users/"). The data is saved in _cache_. A link to a live demo using [surge](https://surge.sh/).
@@ -53,14 +42,20 @@ Demo of different `fetch` constructions **client-side**. We just render the ids 
 
 ## _fetch_ and _cache_ API
 
+[Back to start](#introduction)
+
 - `async await` with `try/catch`.
 - The _cache_ API is also implemented with `await`.
 
 ## Parallel fetching
 
+[Back to start](#introduction)
+
 Given an array `usersIds = [1,...n]`, we map to an array of promises indexed by `usersIds`. These promises are simply given by `fetch(uri/{id})` and rendered in the browser. We then call `Promise.all([arrayOfPromises])`.
 
 ## Sequential fetching
+
+[Back to start](#introduction)
 
 Suppose we have a fixed number of tasks/promises. If we simply do `promise1.then(promise2).then(promise3)`, we can't capture the return values. Then we can do (`display` is just a browser rendering method):
 
@@ -139,13 +134,17 @@ console.log("cacheName", matchedCachedObj.data.email);
 
 ## AXIOS
 
+[Back to start](#introduction)
+
 Implementation of alternative library `Axios`: looping and post.
 
-## Workbox
+### Workbox
 
 TODO
 
 ## Bundling _browserify_
+
+[Back to start](#introduction)
 
 If we want to work with `indexedDB`, we can use the `npm` package [idb][1]. To do so, we have a working file _index.js_ that contains the code using `idb`. To use it, we need to require the module `idb`, so we need to bundle it. We can use a quick tool such as the `npm` package [browserify][2]:
 
@@ -161,6 +160,8 @@ If we want to work with `indexedDB`, we can use the `npm` package [idb][1]. To d
 [2]: http://browserify.org/ "browserify"
 
 ## Bundling _Webpack_
+
+[Back to start](#introduction)
 
 ### Install `npm` packages
 
@@ -357,5 +358,7 @@ script ~~type="module"~~ src="src/index.js"> /script
 ```
 
 ## Error handling
+
+[Back to start](#introduction)
 
 <https://stackoverflow.com/questions/45285129/any-difference-between-await-promise-all-and-multiple-await/54291660#54291660>
