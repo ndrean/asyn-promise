@@ -10,9 +10,9 @@ Demo of different `fetch` constructions **client-side**. We just render the ids 
 
 - [Batch](#batch-fetching) fetching with `array.slice()` and then `promise.all()` to fetch by batch
 
-- Short explanation of the implementation of storing fetch GET request into the [cache](#cache)
+- [cache](#cache): short explanation of the implementation of cache-storing of GET requests
 
-- Setup and usage of [Workbox](#workbox)
+  - Setup and usage of [Workbox](#workbox)
 
 - [Axios](#axios)
 
