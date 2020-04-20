@@ -250,8 +250,8 @@ module.exports = config();
 
 > We have defined how to import CSS files. We need to load the `css-loader` and `style-loader` packages firstly, declare how to find them and them compile and inject the styles. We also have to add `import "./styles.css"` within `index.js` and remove the link in the header of the index.html file.
 
-> #index.js import "./styles.css"
-> index.html <s><link rel="stylesheet" type="text/css" href="./styles.css"></s>
+- (index.js) import "./styles.css"
+- (index.html) <s><link rel="stylesheet" type="text/css" href="./styles.css"></s>
 
 > Since we will compile the project to the `main.js` file in the '/dist' directory, we make the script in the 'index.html' point to the output filename used in 'webpack.config.js' (output: [...,filename: main.js'])
 
