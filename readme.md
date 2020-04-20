@@ -336,8 +336,6 @@ Once the compilation is made, with this config, we will serve the files with `we
 
 - Firstly, we need a file `index.html` and create a directory `/src` and put all our files inside. The main js file will be named `/src/index.js`. The link to this file should be declared in the _index.html_ file **without type="module"** (which is needed for `webpack`otherwise).
 
-it is ~~ok~~~
-
 script ~~type="module"~~ src="src/index.js"> /script
 
 - Then since we use `async/await`, we can limit the accepted of browsers to those who accept ES5, through the file `package.json` ( if we use the bundler `Parcel`)
