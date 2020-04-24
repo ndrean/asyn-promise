@@ -50,7 +50,7 @@ const fetchBatch = async (users, name) => {
   const p = 2;
   for (let i = 0; i <= l; i += p) {
     const slicedRequests = users.slice(i, i + p).map(async (userID) => {
-      return getByAsync(uriu, userID, name).then((r) =>
+      return await getByAsync(uriu, userID, name).then((r) =>
         display("#resu2", r, "(Batch # " + i + ")")
       );
       // .catch((err) => console.log("batch", err, userID));
