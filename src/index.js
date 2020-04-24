@@ -6,7 +6,7 @@ import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 
-let l = 15; // max number of users in this API
+let l = 10; // max number of users in this API
 
 // create an array [1,2,3,...,l]
 const arrayOfUsersId = [...Array(l)].map((_, i) => i + 1);
@@ -47,7 +47,7 @@ for (let i = 1; i <= l; i++) {
 /**************  batch of length p with Promise.then syntax ****************/
 
 const fetchBatch = async (users, name) => {
-  const p = 5;
+  const p = 2;
   for (let i = 0; i <= l; i += p) {
     const slicedRequests = users.slice(i, i + p).map(async (userID) => {
       return getByAsync(uriu, userID, name).then((r) =>
