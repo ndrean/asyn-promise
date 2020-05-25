@@ -1,6 +1,6 @@
 ## Introduction
 
-Demo of different `fetch` constructions **client-side**. We just render the ids in the browser to view the result of testing some fetch chaining strategies. We used a public API (endpoint: "https://reqres.in/api/users/" supporting `CORS` and `https` or "https://jsonplaceholder.typicode.com/users/"). The data is saved in _cache_. A link to a live demo using [surge](https://surge.sh/).
+Demo of different `fetch` constructions **client-side**. We just render the ids in the browser to view the result of testing some fetch chaining strategies. We used a public API (endpoint: "https://reqres.in/api/users/" supporting `CORS` and `https` or "https://jsonplaceholder.typicode.com/users/"). The data is saved in _cache_. A link to a live demo using [surge](https://surge.sh/). < https://ndrean.github.io/asyn-promise/.
 
 - [Simple loop](#versions-of-fetch-and-cache-API) with the construction: `async/await`
 
